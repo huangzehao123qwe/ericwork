@@ -19,8 +19,7 @@
     <a href="index.html" class="nav-logo">Eric Huang</a>
     <ul class="nav-links">
       <li><a href="index.html#work">Work</a></li>
-      <li><a href="index.html#philosophy">Philosophy</a></li>
-      <li><a href="resume.pdf" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a></li>
+      <li><a href="resume.pdf?v=20260320" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a></li>
     </ul>
   </div>
 </nav>
@@ -52,7 +51,9 @@
       <span class="tag">Collaboration</span>
       <span class="tag">Desktop</span>
     </div>
-    <p>Turning a slow, manual compliance rule-building process into a contextual, scalable framework that actually matches how procurement admins think and work.</p>
+    <p>
+      Procurement admins were stuck in <strong>slow, manual</strong> compliance work; the product didn’t match how they use <strong>org structure</strong> to think about policy. I led <strong>research</strong>, <strong>IA</strong>, and <strong>interaction design</strong> for a <strong>user-group-based</strong> rule model, the <strong>compliance console</strong> (nested default/exception rules at scale), and clarity that rules show up in <strong>catalog search</strong>—not only on admin screens.
+    </p>
   </div>
 
   <!-- My Role -->
@@ -60,7 +61,7 @@
     <div class="my-role-icon">👤</div>
     <div class="my-role-content">
       <div class="block-label">My Contributions</div>
-      <p>I led research, IA strategy, solution architecture evaluation, and full interaction design — from mapping the decision journey of procurement admins to designing the guided rule-building flow. I facilitated concept model reviews with stakeholders and partnered with PM and engineering leads to validate the user-group-based model was both technically sound and adoption-ready.</p>
+      <p><strong>Owned</strong> the admin journey end-to-end: research synthesis, <strong>three-way architecture evaluation</strong> (item vs item-rule vs user-group), <strong>console IA</strong> with engineering and customers, usability validation, and partnership with PM/eng to ship something adoptable—not just technically correct.</p>
       <div class="my-role-chips">
         <span class="chip">User Research</span>
         <span class="chip">IA Strategy</span>
@@ -75,47 +76,38 @@
   <!-- Context -->
   <div class="block">
     <div class="block-label">Context &amp; Challenge</div>
-    <h3>80% of admin time lost to manual compliance work</h3>
-    <p>Procurement admins were executing compliance entirely by hand — manually reviewing every purchase request, writing internal guidelines from scratch, and personally conducting user training. The existing system technically worked, but it fundamentally lacked the empathy and scale needed for real enterprise use.</p>
-  </div>
-
-  <div class="callout accent-left">
-    <div class="block-label">The Core Problem</div>
-    <p style="font-size:15px; color:var(--ink-secondary); line-height:1.75;">
-      The existing solution was <strong style="color:var(--ink);">technically functional but unusable at scale</strong> — it lacked contextual understanding of how procurement admins actually build compliance, and its rule management had no connection to the organizational structures admins already work within.
+    <h3>Manual compliance work didn’t scale</h3>
+    <p>
+      Admins were doing compliance <strong>by hand</strong>—reviews, one-off guidance, training—while the UI asked them to wire rules in ways that ignored <strong>how orgs are actually structured</strong>. The tool worked in demos, not in real volume.
     </p>
   </div>
 
   <!-- Research -->
   <div class="block">
     <div class="block-label">Research Insights</div>
-    <h3>What admins actually needed</h3>
+    <h3>What had to be true</h3>
   </div>
 
   <ul class="insight-list">
     <li>
       <div class="insight-icon">🔁</div>
-      <span>Admins struggled with <strong>inconsistent rule setup</strong> and were overwhelmed by the volume of manual, repetitive compliance work.</span>
+      <span><strong>Less repetitive manual work</strong> — rule setup had to be repeatable and consistent, not a custom project every time.</span>
     </li>
     <li>
       <div class="insight-icon">⚙️</div>
-      <span>The solution needed to <strong>automate repetitive manual work</strong> while keeping onboarding simple enough for non-technical admins.</span>
+      <span><strong>Simple for non-technical admins</strong> — powerful rules without a CS degree; onboarding had to be manageable.</span>
     </li>
     <li>
       <div class="insight-icon">📈</div>
-      <span><strong>Scalability was a hard requirement</strong> — the design had to grow with the organization without creating performance bottlenecks.</span>
-    </li>
-    <li>
-      <div class="insight-icon">🛠</div>
-      <span>Engineering complexity had to stay low — a <strong>maintainable architecture</strong> was as important as the user experience.</span>
+      <span><strong>Scalable and maintainable</strong> — grow with the company without fragile one-offs or performance cliffs.</span>
     </li>
   </ul>
 
   <!-- Solution Exploration -->
   <div class="block">
     <div class="block-label">Solution Exploration</div>
-    <h3>Three architectural approaches evaluated</h3>
-    <p>We explored three distinct models for how compliance rules could be structured. Each had real trade-offs in precision, adoption, and scalability.</p>
+    <h3>Three ways to model rules</h3>
+    <p>We evaluated <strong>item-based</strong>, <strong>item + rule</strong>, and <strong>user-group-based</strong> structures—trade-offs were precision, adoption, and scale.</p>
   </div>
 
   <table class="solution-table">
@@ -155,14 +147,14 @@
 
   <div class="callout green-left">
     <p style="font-size:14px; color:var(--ink-secondary); line-height:1.75;">
-      <strong style="color:var(--ink);">Why User Group-Based?</strong> It leverages existing org data — user hierarchy, cost centres, reporting lines — that admins already understand. This dramatically lowers the learning curve, improves precision, and aligns naturally with how organizations are structured.
+      <strong style="color:var(--ink);">Why user groups won:</strong> Rules attach to data admins already use—teams, cost centers, hierarchy—so configuration matches <strong>mental models</strong> and scales without per-item spaghetti.
     </p>
   </div>
 
   <!-- Before/After -->
   <div class="block">
     <div class="block-label">Design Transformation</div>
-    <h3>From aimless rule-linking to guided, targeted configuration</h3>
+    <h3>From ad hoc linking to guided, org-aligned rules</h3>
   </div>
 
   <div class="comparison-grid">
@@ -179,25 +171,54 @@
     <div class="comparison-card after">
       <div class="comp-label">After</div>
       <h4>Guided, Contextual Configuration</h4>
-      <ul style="list-style:none;">
-        <li style="display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--ink-secondary);">
-          <span style="color:var(--accent-green);font-weight:700;flex-shrink:0;">✓</span>
-          Step-by-step guided rule-building experience
-        </li>
-        <li style="display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--ink-secondary);">
-          <span style="color:var(--accent-green);font-weight:700;flex-shrink:0;">✓</span>
-          Default + Exception context model (ordered priority)
-        </li>
-        <li style="display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--ink-secondary);">
-          <span style="color:var(--accent-green);font-weight:700;flex-shrink:0;">✓</span>
-          Rules aligned to user groups &amp; org structure
-        </li>
-        <li style="display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--ink-secondary);">
-          <span style="color:var(--accent-green);font-weight:700;flex-shrink:0;">✓</span>
-          Targeted configuration with clear scoping
-        </li>
+      <ul>
+        <li>Step-by-step guided rule-building experience</li>
+        <li>Default + Exception context model (ordered priority)</li>
+        <li>Rules aligned to user groups &amp; org structure</li>
+        <li>Targeted configuration with clear scoping</li>
       </ul>
     </div>
+  </div>
+
+  <!-- Compliance console: IA for nested rules -->
+  <div class="block">
+    <div class="block-label">Admin experience</div>
+    <h3>Console IA — nested rules that stay legible</h3>
+    <p>
+      With <strong>engineering and customers</strong>, we shipped the <strong>Requisitioning Compliance Console</strong>: <strong>default</strong> vs <strong>exception</strong> contexts with explicit <strong>order</strong>, separate surfaces for <strong>search context</strong> and <strong>display rules</strong> (sort vs hide), and bulk edit where needed—so high-volume admins can scan <strong>what wins when</strong>, then drill in.
+    </p>
+  </div>
+
+  <div class="cs-gallery">
+    <figure class="cs-figure">
+      <img src="images/purchase-compliance/console-overview.png" alt="Requisitioning Compliance Console Overview: default and exception context tables with sorting and hiding rules" width="1024" height="658" loading="lazy" decoding="async" />
+      <figcaption><strong>Overview</strong> — default vs exceptions; <strong>order</strong> column for priority; sorting / hiding surfaced per context.</figcaption>
+    </figure>
+    <figure class="cs-figure">
+      <img src="images/purchase-compliance/console-maintain-context-modal.png" alt="Maintain Requisition Context and Rules modal with default and exception rows and display rule tags" width="1024" height="660" loading="lazy" decoding="async" />
+      <figcaption><strong>Maintain context</strong> — one place to edit conditions, sorting rulesets, and hiding rules for default and exceptions.</figcaption>
+    </figure>
+    <figure class="cs-figure">
+      <img src="images/purchase-compliance/console-requisition-search-context.png" alt="Requisition Search Context page with default and exception requisition context tables" width="1024" height="658" loading="lazy" decoding="async" />
+      <figcaption><strong>Search context</strong> — same default / exception model, scoped to how requisition search behaves.</figcaption>
+    </figure>
+    <figure class="cs-figure">
+      <img src="images/purchase-compliance/console-display-rules.png" alt="Display Rules page with Sorting and Hiding tabs and empty states" width="1024" height="658" loading="lazy" decoding="async" />
+      <figcaption><strong>Display rules</strong> — sorting rules and reusable priority rulesets, separate from hiding logic.</figcaption>
+    </figure>
+  </div>
+
+  <!-- Catalog: compliance affects ranking -->
+  <div class="block">
+    <div class="block-label">Downstream impact</div>
+    <h3>What requesters see in catalog</h3>
+    <p>
+      Policy isn’t invisible to buyers. <strong>Search Catalog</strong> uses the same tiers to <strong>rank and badge</strong> results—filters match compliance categories, and preferred options rise above a plain keyword match.
+    </p>
+    <figure class="cs-figure">
+      <img src="images/purchase-compliance/catalog-search-compliance-ranking.png" alt="Search Catalog: monitor search with Requisition Compliance filters and results ranked by compliance tier with badges" width="1024" height="730" loading="lazy" decoding="async" />
+      <figcaption>Catalog search ranks items by compliance tier (e.g. Most Compliant, priority vendor)—so policy shows up where people actually shop.</figcaption>
+    </figure>
   </div>
 
   <!-- Quote -->
@@ -210,7 +231,7 @@
   <!-- Metrics -->
   <div class="block">
     <div class="block-label">Outcome &amp; Impact</div>
-    <h3>Dramatic reduction in time and friction</h3>
+    <h3>Measured results</h3>
   </div>
 
   <div class="metrics-grid">
@@ -226,25 +247,25 @@
 
   <!-- Key Highlights -->
   <div class="block">
-    <div class="block-label">Key Highlights</div>
-    <h3>What made this project stand out</h3>
+    <div class="block-label">Takeaways</div>
+    <h3>What stuck</h3>
   </div>
 
   <div class="kh-grid">
     <div class="kh-card">
       <div class="kh-number">01</div>
-      <h4>Solving conflicting priorities through org-structure alignment</h4>
-      <p>By anchoring rules to existing user groups — rather than items or categories — we resolved the tension between precision and scalability in a single architectural decision.</p>
+      <h4>Anchor rules to org structure</h4>
+      <p><strong>User-group-based</strong> modeling beat item-level sprawl: one decision unlocked precision and scale for admins.</p>
     </div>
     <div class="kh-card">
       <div class="kh-number">02</div>
-      <h4>The right IA model had an outsized impact on adoption</h4>
-      <p>Switching from item-based to user-group-based rules transformed onboarding from a steep cliff into a guided walk — dramatically increasing admin confidence and adoption speed.</p>
+      <h4>Make nesting scannable</h4>
+      <p>Default + exception + <strong>priority order</strong>, plus splitting <strong>search</strong> vs <strong>display</strong> rules, kept complex policy legible at volume.</p>
     </div>
     <div class="kh-card">
       <div class="kh-number">03</div>
-      <h4>Context isn't a field on a form — it's the frame that makes rules meaningful</h4>
-      <p>Visualizing how rules apply to specific user groups in real time was the single most impactful design decision for building admin trust in the system.</p>
+      <h4>Prove value in the catalog</h4>
+      <p>Admins trust the system when <strong>buyers</strong> see compliance in ranked results—not only in back-office screens.</p>
     </div>
   </div>
 
@@ -253,15 +274,15 @@
     <div class="ref-label">Reflection</div>
     <p>"User context isn't just another table of data — it's part of the experience!"</p>
     <div class="next-steps">
-      <strong>Next steps:</strong> The roadmap includes <strong>ML-driven rule suggestions</strong> that learn from existing org patterns, and a <strong>Live Preview</strong> mode so admins can see the impact of rule changes on user groups before publishing.
+      Roadmap ideas: <strong>suggested rules</strong> from org patterns and <strong>live preview</strong> of rule impact before publish.
     </div>
   </div>
 
   <!-- More to the story -->
   <div class="more-story">
     <div class="more-story-text">
-      <strong>There's more to the story...</strong>
-      <span>This case study covers the core narrative. Research synthesis, concept model diagrams, IA deliverables, and usability testing artifacts are available upon request.</span>
+      <strong>More on request</strong>
+      <span>Research synthesis, IA diagrams, and usability artifacts for a deeper dive.</span>
     </div>
     <div class="more-story-badge">Request full case study →</div>
   </div>
@@ -286,7 +307,7 @@
     }),
     { threshold: 0.1 }
   );
-  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story').forEach(el => {
+  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity .5s ease, transform .5s ease';
