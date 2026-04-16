@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inventory Stock Picking — Eric Huang</title>
+  <title>Inventory Stock Picking — Mobile ops UX (Eric Huang)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet" />
@@ -50,7 +50,21 @@
       <span class="tag">Info Architecture</span>
       <span class="tag">Mobile</span>
     </div>
-    <p>Workday’s mobile picking flow was built for the wrong density—workers tapped more than they picked. I led UX from <strong>audit → two design iterations</strong>, shipped a <strong>scanner-driven single-pick</strong> path (live today), then designed a <strong>batch pick</strong> experience in <strong>React</strong> with clearer hierarchy for multi-line work.</p>
+    <div class="cs-overview">
+      <div class="cs-overview-item">
+        <div class="block-label">Design problem</div>
+        <p>High-volume warehouse teams were stuck in click-heavy mobile flows: low-density patterns, buried primaries, and scroll-tap loops that slowed picks on the floor.</p>
+      </div>
+      <div class="cs-overview-item">
+        <div class="block-label">Outcome</div>
+        <p>Shipped in Workday (2023–2024): scanner-led single pick in production, then a React batch-pick path for multi-line work—plus design-system updates so dense mobile patterns could extend beyond the warehouse.</p>
+      </div>
+      <div class="cs-overview-item">
+        <div class="block-label">My contributions</div>
+        <p>Owned mobile UX end to end: usability audit, two design iterations, shipped interaction model with engineering, usability testing, and design-system collaboration for high-density components.</p>
+      </div>
+    </div>
+    <p>Warehouse pickers were <strong>fighting the phone</strong>—wrong component density and buried actions on the floor. I led <strong>audit → two iterations</strong>, shipped <strong>scanner-led single pick</strong> (live), then a <strong>React batch-pick</strong> flow for multi-line work. Outcome: <strong>fewer taps</strong>, clearer “what now,” and <strong>design-system</strong> patterns that extended past the warehouse.</p>
   </div>
 
   <!-- My Role -->
@@ -96,6 +110,12 @@
       <span><strong>Buried actions</strong> — confirm / skip / move on lived under secondary detail, so every pick felt slower than it should.</span>
     </li>
   </ul>
+
+  <div class="block">
+    <div class="block-label">Alignment</div>
+    <h3>Scan-first bets with PM and engineering</h3>
+    <p>Working sessions with PM and engineering aligned on when scan should advance the task, what had to ship before peak season, and how batch UI could follow without destabilizing the live single-pick path workers already relied on.</p>
+  </div>
 
   <!-- Iterations (summary first, then screenshots = same shipped single-pick) -->
   <div class="block">
@@ -172,10 +192,33 @@
     </figure>
   </div>
 
+  <div class="block">
+    <div class="block-label">Inclusive interaction</div>
+    <h3>Touch, glare, and one-handed reach</h3>
+    <p>Targets, “now picking” focus, and bottom sheets were sized for gloved hands and one-handed reach on the floor—paired with engineering on contrast and motion so counts and locations stayed legible under warehouse lighting.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Evidence in the cycle</div>
+    <h3>What we learned changed the ship order</h3>
+    <p>Audit clips and usability rounds steered iteration 2 into production first; batch React UI shipped as a follow-on once the core pick loop stabilized, so we didn’t overload change management for frontline teams.</p>
+  </div>
+
   <!-- Outcomes -->
   <div class="block">
     <div class="block-label">Outcomes</div>
     <h3>What changed</h3>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-number">2</div>
+      <div class="metric-label">Design iterations—from denser lists to scanner-led single pick—before batch pick</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-number">1</div>
+      <div class="metric-label">High-density mobile pattern set extended to other Workday surfaces after the warehouse</div>
+    </div>
   </div>
 
   <ul class="checklist" style="margin-bottom:56px;">
@@ -206,6 +249,16 @@
       <h4>Batch = familiar commerce patterns</h4>
       <p>For multi-line picks, cards and sheets borrowed from consumer pickup apps so workers could parse work at a glance.</p>
     </div>
+    <div class="kh-card">
+      <div class="kh-number">04</div>
+      <h4>Engineering, early and often</h4>
+      <p>Cards, sheets, and tabs were defined alongside mobile engineering so React components landed closer to final density, motion, and edge cases—not a handoff wallpaper exercise.</p>
+    </div>
+    <div class="kh-card">
+      <div class="kh-number">05</div>
+      <h4>Design system ripple</h4>
+      <p>High-density layouts and components drafted for warehouse work became the reference for other financial mobile flows that needed the same “fewer taps, more signal” discipline.</p>
+    </div>
   </div>
 
   <!-- Reflection -->
@@ -231,9 +284,16 @@
 <!-- ─── FOOTER ─── -->
 <footer>
   <h2>Let's connect.</h2>
-  <p>Open to senior IC and lead design roles in enterprise software, AI products, and complex systems.</p>
-  <a href="mailto:Eric.chakho.wong@gmail.com">Get in touch →</a>
-  <div class="footer-note">Eric Huang · Senior Product Designer · Workday · 2026</div>
+  <p>Open to <strong>principal / senior IC</strong> roles in <strong>workflow-heavy</strong> and <strong>agentic enterprise UX</strong>—mobile, web, and systems thinking.</p>
+  <div class="footer-inline-links">
+    <a href="resume.pdf?v=20260320" target="_blank" rel="noopener">Resume PDF</a>
+    <span aria-hidden="true"> · </span>
+    <a href="mailto:Eric.chakho.wong@gmail.com">Email</a>
+    <span aria-hidden="true"> · </span>
+    <a href="https://www.linkedin.com/in/zehao-eric-huang/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+  <a class="footer-cta" href="mailto:Eric.chakho.wong@gmail.com">Get in touch →</a>
+  <div class="footer-note">Eric Huang · Senior UX Designer · Workday<br />Last updated April 2026</div>
 </footer>
 
 <script>
@@ -246,7 +306,7 @@
     }),
     { threshold: 0.1 }
   );
-  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery').forEach(el => {
+  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery, .cs-overview').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity .5s ease, transform .5s ease';

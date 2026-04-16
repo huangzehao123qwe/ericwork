@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Intake Agent — Eric Huang</title>
+  <title>Intake Agent — Agentic procurement UX (Eric Huang)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet" />
@@ -51,8 +51,22 @@
       <span class="tag">Trust &amp; transparency</span>
       <span class="tag">Desktop</span>
     </div>
+    <div class="cs-overview">
+      <div class="cs-overview-item">
+        <div class="block-label">Design problem</div>
+        <p>Requesters hunted answers across tools and Slack; procurement policy was hard to apply consistently, and “AI” answers weren’t trusted without proof and guardrails.</p>
+      </div>
+      <div class="cs-overview-item">
+        <div class="block-label">Outcome</div>
+        <p>Shipped in Workday from ~2024: a hybrid entry (Quick Links + search + assistant), then Phase 2 in-thread catalog and forms—plus admin routing, testing, and analytics so behavior could be governed in production.</p>
+      </div>
+      <div class="cs-overview-item">
+        <div class="block-label">My contributions</div>
+        <p>Lead UX for dialogue and trust (sources, limits, fallbacks), hybrid IA, and the admin stack. Partnered end-to-end with PM, engineering, research, and data science.</p>
+      </div>
+    </div>
     <p>
-      An AI assistant for <strong>procurement</strong>: employees ask in plain language, get answers tied to policy (with sources), and see suggested next steps. I designed the <strong>conversation</strong> itself—how the agent understands intent, handles follow-ups, and what happens when it shouldn’t guess—not only the surrounding UI. One entry point replaced hunting across intranet pages and Slack.
+      Buyers and requesters were <strong>jumping across tools</strong> for answers that had to match <strong>procurement policy</strong>. I led UX for the <strong>Intake Agent</strong>: grounded replies with <strong>sources</strong>, clear next steps, safe fallbacks when the model shouldn’t guess, and <strong>Phase 2 in-chat ordering</strong>—plus <strong>admin</strong> routing, testing, and analytics. Outcome: <strong>one thread</strong> instead of intranet + Slack scavenger hunts.
     </p>
   </div>
 
@@ -61,7 +75,7 @@
     <div class="my-role-icon">👤</div>
     <div class="my-role-content">
       <div class="block-label">My Contributions</div>
-      <p><strong>What I owned:</strong> Dialogue patterns (questions, answers, errors, fallbacks), trust cues (sources, “don’t guess” states), and <strong>admin tools</strong>—routing rules, test sandbox, analytics. Worked with PM, engineering, research, and data science to ship accurate, explainable experiences.</p>
+      <p><strong>Owned</strong> dialogue + trust UX—questions, answers, errors, fallbacks, <strong>sources</strong>, “don’t guess” states—and the <strong>admin stack</strong> (routing, playground, analytics). Cross-functional lead with PM, engineering, research, and data science to ship explainable agent experiences.</p>
       <div class="my-role-chips">
         <span class="chip">Conversational &amp; agentic UX</span>
         <span class="chip">Intent &amp; dialogue flows</span>
@@ -100,6 +114,12 @@
       <span>Finance and procurement <strong>don’t trust “AI” by default</strong>—wrong answers aren’t acceptable, so explainability wasn’t optional.</span>
     </li>
   </ul>
+
+  <div class="block">
+    <div class="block-label">Alignment</div>
+    <h3>From research signals to shared product bets</h3>
+    <p>Alongside interviews and pilots, we ran structured working sessions with PM, engineering, research, and data science to pressure-test user jobs, failure modes, and what had to ship in v1—including admin rules for when the assistant should stop, escalate, or refuse instead of guessing.</p>
+  </div>
 
   <!-- Legacy-first draft — bridges problem → vision -->
   <div class="block">
@@ -331,6 +351,12 @@
     <p style="color:var(--ink-secondary); font-size:15px;">Procurement is high stakes. Users saw <strong>sources</strong>, <strong>uncertainty</strong> when relevant, and <strong>safe fallbacks</strong>—not blind trust in the model.</p>
   </div>
 
+  <div class="block">
+    <div class="block-label">Inclusive interaction</div>
+    <h3>Keyboard, focus, and readable disclosure</h3>
+    <p>Chat and side-panel patterns were designed with sensible focus order, visible focus states, and legible source disclosure—so “trust the answer” was an interaction problem we refined with engineering against Workday accessibility expectations, not only a model-quality problem.</p>
+  </div>
+
   <!-- Quote -->
   <div class="quote-block">
     <div class="quote-mark">"</div>
@@ -344,6 +370,9 @@
     <h3>Test, ship, measure, fix</h3>
     <p>
       Good answers aren’t “write once.” Admins used the <strong>playground</strong> to test prompts before launch; after launch, <strong>analytics</strong> showed what worked and what failed. User <strong>feedback</strong> on replies helped prioritize updates to rules and policy.
+    </p>
+    <p>
+      That evidence also helped the team sequence what to harden next versus what could wait until more real usage—so design, data, and product could align on near-term roadmap without guessing.
     </p>
     <ul class="checklist" style="margin-top:12px;max-width:var(--prose-max);">
       <li>Test risky paths before employees see them</li>
@@ -360,12 +389,12 @@
 
   <div class="metrics-grid">
     <div class="metric-card">
-      <div class="metric-number">−60%</div>
-      <div class="metric-label">Less time to create and assign rules per user group</div>
+      <div class="metric-number">2</div>
+      <div class="metric-label">Shipped phases: hybrid assistant + Quick Links, then in-thread catalog, forms, and confirmations</div>
     </div>
     <div class="metric-card">
-      <div class="metric-number">−90%</div>
-      <div class="metric-label">Less time to pick the right compliance option</div>
+      <div class="metric-number">1</div>
+      <div class="metric-label">Primary thread for answers and next steps—grounded in policy, with governed handoffs when the model shouldn’t guess</div>
     </div>
   </div>
 
@@ -396,6 +425,11 @@
       <h4>Reusable patterns</h4>
       <p>Intent → grounded answer → next action → safe recovery—designed to scale to other workflows, not a one-off.</p>
     </div>
+    <div class="kh-card">
+      <div class="kh-number">05</div>
+      <h4>Platform, not hero UI</h4>
+      <p>When broader Workday patterns skewed toward lighter surfaces, flows and prototypes showed where procurement density, agent panels, and admin tables had to diverge—so we could align design system and engineering on a shell that still fit real buying work.</p>
+    </div>
   </div>
 
   <!-- Reflection -->
@@ -421,9 +455,16 @@
 <!-- ─── FOOTER ─── -->
 <footer>
   <h2>Let's connect.</h2>
-  <p>Open to principal / senior IC roles in <strong>conversational &amp; agentic UX</strong>, enterprise AI products, and complex systems.</p>
-  <a href="mailto:Eric.chakho.wong@gmail.com">Get in touch →</a>
-  <div class="footer-note">Eric Huang · Senior Product Designer · Workday · 2026</div>
+  <p>Open to <strong>principal / senior IC</strong> roles in <strong>workflow-heavy</strong> and <strong>agentic enterprise UX</strong>—mobile, web, and systems thinking.</p>
+  <div class="footer-inline-links">
+    <a href="resume.pdf?v=20260320" target="_blank" rel="noopener">Resume PDF</a>
+    <span aria-hidden="true"> · </span>
+    <a href="mailto:Eric.chakho.wong@gmail.com">Email</a>
+    <span aria-hidden="true"> · </span>
+    <a href="https://www.linkedin.com/in/zehao-eric-huang/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+  <a class="footer-cta" href="mailto:Eric.chakho.wong@gmail.com">Get in touch →</a>
+  <div class="footer-note">Eric Huang · Senior UX Designer · Workday<br />Last updated April 2026</div>
 </footer>
 
 <script>
@@ -436,7 +477,7 @@
     }),
     { threshold: 0.1 }
   );
-  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story').forEach(el => {
+  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-overview').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity .5s ease, transform .5s ease';

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Purchase Compliance — Eric Huang</title>
+  <title>Purchase Compliance — Enterprise workflow &amp; IA (Eric Huang)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet" />
@@ -50,6 +50,20 @@
       <span class="tag">UX Design</span>
       <span class="tag">Collaboration</span>
       <span class="tag">Desktop</span>
+    </div>
+    <div class="cs-overview">
+      <div class="cs-overview-item">
+        <div class="block-label">Design problem</div>
+        <p>Procurement admins were drowning in manual compliance work, while the UI asked them to wire rules in ways that didn’t match how teams, cost centers, and hierarchy actually shape policy.</p>
+      </div>
+      <div class="cs-overview-item">
+        <div class="block-label">Outcome</div>
+        <p>Shipped in Workday (2024–2025): a user-group-based compliance console with nested default/exception IA, plus compliance surfaced in catalog search—so buyers see policy, not only back-office admins.</p>
+      </div>
+      <div class="cs-overview-item">
+        <div class="block-label">My contributions</div>
+        <p>Lead UX for research synthesis, three-way architecture evaluation, console IA with engineering and customers, usability validation, and interaction design through production-ready delivery with PM and eng.</p>
+      </div>
     </div>
     <p>
       Procurement admins were stuck in <strong>slow, manual</strong> compliance work; the product didn’t match how they use <strong>org structure</strong> to think about policy. I led <strong>research</strong>, <strong>IA</strong>, and <strong>interaction design</strong> for a <strong>user-group-based</strong> rule model, the <strong>compliance console</strong> (nested default/exception rules at scale), and clarity that rules show up in <strong>catalog search</strong>—not only on admin screens.
@@ -102,6 +116,12 @@
       <span><strong>Scalable and maintainable</strong> — grow with the company without fragile one-offs or performance cliffs.</span>
     </li>
   </ul>
+
+  <div class="block">
+    <div class="block-label">Alignment</div>
+    <h3>From research signals to a shippable rule model</h3>
+    <p>Structured working sessions with PM, engineering, research, and customer admins pressure-tested rule models, edge cases, and what “good enough to ship” meant for nested defaults—before locking the user-group direction and the console’s default/exception IA.</p>
+  </div>
 
   <!-- Solution Exploration -->
   <div class="block">
@@ -228,6 +248,18 @@
     <div class="quote-source">— Procurement manager at a major U.S. healthcare provider, on first use</div>
   </div>
 
+  <div class="block">
+    <div class="block-label">Inclusive interaction</div>
+    <h3>Dense admin work, still navigable</h3>
+    <p>Stepped flows, wide tables, and nested contexts needed predictable keyboard paths, scannable hierarchy at default zoom, and error-prevention where mistakes are costly—tightened with engineering so the console held up for high-volume admins, not only demo-clean layouts.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-label">Evidence in the cycle</div>
+    <h3>What we learned reshaped sequencing</h3>
+    <p>Usability results and sponsor feedback helped prioritize core configuration reliability before edge-case polish, then justify catalog surfacing so buyers—not only admins—felt the value of the same rules.</p>
+  </div>
+
   <!-- Metrics -->
   <div class="block">
     <div class="block-label">Outcome &amp; Impact</div>
@@ -267,6 +299,16 @@
       <h4>Prove value in the catalog</h4>
       <p>Admins trust the system when <strong>buyers</strong> see compliance in ranked results—not only in back-office screens.</p>
     </div>
+    <div class="kh-card">
+      <div class="kh-number">04</div>
+      <h4>Co-design with admins</h4>
+      <p>Reviews and walkthroughs with customer admins kept language and grouping aligned with how policy teams actually talk about defaults, exceptions, and priority—not an abstract data model.</p>
+    </div>
+    <div class="kh-card">
+      <div class="kh-number">05</div>
+      <h4>Platform fit without dilution</h4>
+      <p>When shared patterns skewed “light,” prototypes showed where inline reorder, split contexts, and density were non-negotiable for rule volume—so we could align design system and engineering without flattening the work.</p>
+    </div>
   </div>
 
   <!-- Reflection -->
@@ -292,9 +334,16 @@
 <!-- ─── FOOTER ─── -->
 <footer>
   <h2>Let's connect.</h2>
-  <p>Open to senior IC and lead design roles in enterprise software, AI products, and complex systems.</p>
-  <a href="mailto:Eric.chakho.wong@gmail.com">Get in touch →</a>
-  <div class="footer-note">Eric Huang · Senior Product Designer · Workday · 2026</div>
+  <p>Open to <strong>principal / senior IC</strong> roles in <strong>workflow-heavy</strong> and <strong>agentic enterprise UX</strong>—mobile, web, and systems thinking.</p>
+  <div class="footer-inline-links">
+    <a href="resume.pdf?v=20260320" target="_blank" rel="noopener">Resume PDF</a>
+    <span aria-hidden="true"> · </span>
+    <a href="mailto:Eric.chakho.wong@gmail.com">Email</a>
+    <span aria-hidden="true"> · </span>
+    <a href="https://www.linkedin.com/in/zehao-eric-huang/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+  <a class="footer-cta" href="mailto:Eric.chakho.wong@gmail.com">Get in touch →</a>
+  <div class="footer-note">Eric Huang · Senior UX Designer · Workday<br />Last updated April 2026</div>
 </footer>
 
 <script>
@@ -307,7 +356,7 @@
     }),
     { threshold: 0.1 }
   );
-  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery').forEach(el => {
+  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery, .cs-overview').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity .5s ease, transform .5s ease';
