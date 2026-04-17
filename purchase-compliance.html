@@ -75,6 +75,13 @@
     </p>
   </div>
 
+  <div class="block">
+    <div class="block-label">Start here</div>
+    <h3>If procurement isn’t your domain</h3>
+    <p>Think of this as software that helps organizations answer four questions, over and over: <em>who</em> does a rule apply to, <em>what’s allowed by default</em>, <em>what exceptions exist</em>, and <em>where people actually see the outcome</em> when they try to buy something. The interface is dense because mistakes are expensive—wrong rules mean wrong spend, delays, and audits.</p>
+    <p>The rest of this case study walks through the problem, the research signals, the architecture choice, and the admin console—then how the same rules show up for shoppers in catalog search.</p>
+  </div>
+
   <!-- My Role -->
   <div class="my-role-block">
     <div class="my-role-icon">👤</div>
@@ -91,6 +98,69 @@
       </div>
     </div>
   </div>
+
+  <div class="block">
+    <div class="block-label">Governance angle</div>
+    <h3>A familiar problem class (with an honest boundary)</h3>
+    <p>Many enterprise products need admins to configure policy at scale: attach it to the right groups, handle exceptions, resolve conflicts, and prove the policy in the places people work—not only on a settings screen. This project is about purchasing compliance, not data catalogs—but the <em>interaction shape</em> is the same family of UX: legible nesting, clear precedence, safe defaults, and downstream surfacing.</p>
+    <p class="cs-analogy-footnote">Below is a <em>reader map</em> only. It does <em>not</em> mean this product is a database governance tool; it helps generalists translate concepts without procurement jargon.</p>
+    <table class="solution-table governance-analogy-table" aria-label="Plain language map to procurement terms and a general analogy">
+      <thead>
+        <tr>
+          <th>Plain idea</th>
+          <th>In this product</th>
+          <th>General analogy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Who the policy applies to</td>
+          <td>User groups tied to org structure (teams, cost centers, hierarchy)</td>
+          <td>Scoping rules to the right people or organizational boundaries</td>
+        </tr>
+        <tr>
+          <td>Default vs override</td>
+          <td>Default and exception “contexts” for the same policy surface</td>
+          <td>Inherited settings with explicit overrides</td>
+        </tr>
+        <tr>
+          <td>What wins when rules disagree</td>
+          <td>Priority order and reviewable stacks in the console</td>
+          <td>Precedence / stacking so outcomes are predictable</td>
+        </tr>
+        <tr>
+          <td>Where people feel the policy</td>
+          <td>Catalog search ranking, filters, and badges for buyers</td>
+          <td>Showing policy outcomes where discovery happens—not only in admin tools</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="block">
+    <div class="block-label">End-to-end</div>
+    <h3>From admin configuration to what buyers see</h3>
+    <p>Three beats—still in everyday language—before the detailed screens below.</p>
+    <div class="governance-flow" aria-label="Three steps from admin rules to buyer experience">
+      <div class="governance-flow-step">
+        <span class="governance-flow-num" aria-hidden="true">1</span>
+        <h4 class="governance-flow-title">Define</h4>
+        <p>Admins attach rules to the parts of the org that actually own purchasing policy.</p>
+      </div>
+      <div class="governance-flow-step">
+        <span class="governance-flow-num" aria-hidden="true">2</span>
+        <h4 class="governance-flow-title">Configure</h4>
+        <p>The console makes defaults, exceptions, and ordering scannable so teams don’t mis-wire high-stakes rules.</p>
+      </div>
+      <div class="governance-flow-step">
+        <span class="governance-flow-num" aria-hidden="true">3</span>
+        <h4 class="governance-flow-title">Surface</h4>
+        <p>Requesters encounter the same policy when they search and compare options—so trust isn’t “back office only.”</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional additions (if Eric shares later): audit/versioning narrative, rule-type counts, stakeholder titles for gov lens, redacted spec or release note snippet. -->
 
   <!-- Context -->
   <div class="block">

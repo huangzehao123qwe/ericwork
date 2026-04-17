@@ -969,6 +969,10 @@ nav {
   vertical-align: top;
 }
 .solution-table tr:last-child td { border-bottom: none; }
+.governance-analogy-table td:first-child {
+  font-weight: 600;
+  color: var(--ink);
+}
 .solution-table tr.selected td { background: var(--accent-light); color: var(--ink); }
 .solution-table tr.selected td:first-child { font-weight: 700; color: var(--accent); }
 .selected-badge {
@@ -1000,6 +1004,55 @@ nav {
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 100px;
+}
+.cs-analogy-footnote {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-top: 12px;
+  line-height: 1.55;
+}
+.governance-flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+.governance-flow-step {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 18px 16px;
+  position: relative;
+}
+.governance-flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.governance-flow-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.governance-flow-step p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+}
+@media (max-width: 720px) {
+  .governance-flow {
+    grid-template-columns: 1fr;
+  }
 }
 .pill-mid {
   display: inline-block;
