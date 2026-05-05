@@ -18,17 +18,23 @@
 <!-- ─── NAV ─── -->
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Eric Huang</a>
+    <div class="nav-logo-wrap">
+      <a href="index.html" class="nav-logo">Eric Huang</a>
+      <a href="index.html" class="nav-back">← All projects</a>
+    </div>
     <ul class="nav-links">
       <li><a href="index.html#work">Work</a></li>
-      <li><a href="resume.pdf?v=20260320" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a></li>
+      <li><a href="resume.pdf?v=20260420" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a></li>
     </ul>
   </div>
 </nav>
 
+<!-- ─── SCROLL PROGRESS ─── -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <!-- ─── BREADCRUMB ─── -->
 <div class="breadcrumb">
-  <a href="index.html">← All projects</a>
+  <a href="index.html"><span class="back-arrow">←</span> All projects</a>
   <span class="sep">/</span>
   <span class="current">Purchase Compliance</span>
 </div>
@@ -40,7 +46,6 @@
     <div class="cs-header-brand">
       <img class="cs-brand-logo" src="images/workday-logo.jpg" width="56" height="56" alt="Workday" decoding="async" loading="eager" />
     </div>
-    <div class="cs-year-badge">Case Study 02 · 2025</div>
     <h2>Purchase <em>Compliance</em></h2>
     <div class="cs-meta-strip">
       <div class="cs-meta-item"><div class="cs-meta-key">Company</div><div class="cs-meta-val">Workday</div></div>
@@ -241,8 +246,8 @@
   </table>
 
   <div class="callout green-left">
-    <p style="font-size:14px; color:var(--ink-secondary); line-height:1.75;">
-      <strong style="color:var(--ink);">Why user groups won:</strong> Rules attach to data admins already use—teams, cost centers, hierarchy—so configuration matches <strong>mental models</strong> and scales without per-item spaghetti.
+    <p class="callout-body">
+      <strong>Why user groups won:</strong> Rules attach to data admins already use—teams, cost centers, hierarchy—so configuration matches <strong>mental models</strong> and scales without per-item spaghetti.
     </p>
   </div>
 
@@ -319,7 +324,7 @@
   <!-- Quote -->
   <div class="quote-block">
     <div class="quote-mark">"</div>
-    <blockquote>"I've been so eager to see this — I just spent the last 4 hours playing around with it. So far, it's AWESOME!"</blockquote>
+    <blockquote>I've been so eager to see this — I just spent the last 4 hours playing around with it. So far, it's AWESOME!</blockquote>
     <div class="quote-source">— Procurement manager at a major U.S. healthcare provider, on first use</div>
   </div>
 
@@ -335,21 +340,16 @@
     <p>Usability results and sponsor feedback helped prioritize core configuration reliability before edge-case polish, then justify catalog surfacing so buyers—not only admins—felt the value of the same rules.</p>
   </div>
 
-  <!-- Metrics -->
+  <!-- Outcomes -->
   <div class="block">
     <div class="block-label">Outcome &amp; Impact</div>
     <h3>Measured results</h3>
-  </div>
-
-  <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="metric-number">−94.2%</div>
-      <div class="metric-label">Reduction in time to configure compliance rules</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-number">100%</div>
-      <div class="metric-label">Task completion rate in usability testing</div>
-    </div>
+    <ul class="checklist">
+      <li><strong>−94.2%</strong> reduction in time to configure compliance rules</li>
+      <li><strong>100%</strong> task completion rate in usability testing</li>
+      <li>Shipped in Workday 2024–2025: user-group-based console, nested default/exception IA, and compliance surfaced in catalog search</li>
+      <li>Adopted by procurement teams; pattern reused across other rule-based admin surfaces</li>
+    </ul>
   </div>
 
   <!-- Key Highlights -->
@@ -398,7 +398,7 @@
   <!-- More to the story -->
   <div class="more-story">
     <div class="more-story-text">
-      <strong>More on request</strong>
+      <span class="more-story-lead">More on request</span>
       <span>Research synthesis, IA diagrams, and usability artifacts for a deeper dive.</span>
     </div>
     <div class="more-story-badge">Request full case study →</div>
@@ -411,32 +411,72 @@
   <h2>Let's connect.</h2>
   <p>Open to <strong>principal / senior IC</strong> roles in <strong>workflow-heavy</strong> and <strong>agentic enterprise UX</strong>—mobile, web, and systems thinking.</p>
   <div class="footer-inline-links">
-    <a href="resume.pdf?v=20260320" target="_blank" rel="noopener">Resume PDF</a>
+    <a href="resume.pdf?v=20260420" target="_blank" rel="noopener">Resume PDF</a>
     <span aria-hidden="true"> · </span>
     <a href="mailto:Eric.chakho.wong@gmail.com">Email</a>
     <span aria-hidden="true"> · </span>
     <a href="https://www.linkedin.com/in/zehao-eric-huang/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </div>
   <a class="footer-cta" href="mailto:Eric.chakho.wong@gmail.com">Get in touch →</a>
-  <div class="footer-note">Eric Huang · Senior UX Designer · Workday<br />Last updated April 2026</div>
+  <div class="footer-note">Eric Huang · Senior Product Designer · Workday<br />Last updated April 2026</div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => {
-      if (e.isIntersecting) {
+  // For the curious
+  console.log('%c👋 You opened DevTools.', 'font-size:13px;font-weight:700;color:#18181B');
+  console.log('%cGood instinct — inspecting systems is exactly how I work too.', 'font-size:12px;color:#52525B');
+  console.log('%ceric.chakho.wong@gmail.com  ·  linkedin.com/in/zehao-eric-huang', 'font-size:12px;color:#1A56DB');
+
+  // Nav scroll-depth + logo morph
+  (function () {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    const header = document.querySelector('.cs-header');
+    let ticking = false;
+    function update() {
+      const y = window.scrollY;
+      nav.classList.toggle('nav--scrolled', y > 50);
+      if (header) nav.classList.toggle('nav--past-header', y > header.offsetTop + header.offsetHeight);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+    update();
+  })();
+
+  // Scroll progress bar
+  (function () {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let ticking = false;
+    function update() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0) + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+  })();
+
+  // Scroll-reveal for case study sections
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (!e.isIntersecting) return;
         e.target.style.opacity = '1';
         e.target.style.transform = 'translateY(0)';
-      }
-    }),
-    { threshold: 0.1 }
-  );
-  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery, .cs-overview').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    observer.observe(el);
-  });
+        observer.unobserve(e.target);
+      }),
+      { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.block, .callout, .quote-block, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery, .cs-overview, .cs-chapter-heading').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = `opacity 0.72s ${ease}, transform 0.72s ${ease}`;
+      observer.observe(el);
+    });
+  })();
 </script>
 
 </body>

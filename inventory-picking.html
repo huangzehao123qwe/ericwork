@@ -18,17 +18,23 @@
 <!-- ─── NAV ─── -->
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Eric Huang</a>
+    <div class="nav-logo-wrap">
+      <a href="index.html" class="nav-logo">Eric Huang</a>
+      <a href="index.html" class="nav-back">← All projects</a>
+    </div>
     <ul class="nav-links">
       <li><a href="index.html#work">Work</a></li>
-      <li><a href="resume.pdf?v=20260320" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a></li>
+      <li><a href="resume.pdf?v=20260420" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a></li>
     </ul>
   </div>
 </nav>
 
+<!-- ─── SCROLL PROGRESS ─── -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <!-- ─── BREADCRUMB ─── -->
 <div class="breadcrumb">
-  <a href="index.html">← All projects</a>
+  <a href="index.html"><span class="back-arrow">←</span> All projects</a>
   <span class="sep">/</span>
   <span class="current">Inventory Stock Picking</span>
 </div>
@@ -40,7 +46,6 @@
     <div class="cs-header-brand">
       <img class="cs-brand-logo" src="images/workday-logo.jpg" width="56" height="56" alt="Workday" decoding="async" loading="eager" />
     </div>
-    <div class="cs-year-badge">Case Study 03 · 2024</div>
     <h2>Inventory <em>Stock Picking</em></h2>
     <div class="cs-meta-strip">
       <div class="cs-meta-item"><div class="cs-meta-key">Company</div><div class="cs-meta-val">Workday</div></div>
@@ -173,23 +178,13 @@
   <!-- Outcomes -->
   <div class="block">
     <div class="block-label">Outcomes at Workday</div>
-    <h3>What improved</h3>
-    <p>Fewer taps per pick, many more lines visible at once for pros, and a reusable pro-user mobile library that other Workday mobile teams could pull from instead of re-solving density themselves.</p>
-  </div>
-
-  <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="metric-number">1</div>
-      <div class="metric-label">Pro-user mobile component library, built on top of Workday web + mobile base</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-number">2</div>
-      <div class="metric-label">Design rounds — tighter flow first, new component system second</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-number">+</div>
-      <div class="metric-label">Scanner-driven control and auto-field advancement layered on top</div>
-    </div>
+    <h3>What shipped</h3>
+    <ul class="checklist">
+      <li>Pro-user mobile component library shipped — built on Workday's web and mobile base, same tokens, denser proportions for shift-long use</li>
+      <li>Batch pick redesigned with scanner-driven control and auto-advancing fields — measurably fewer taps per pick cycle</li>
+      <li>Library extended across 21 inventory tasks using Cursor — one source of truth for both engineering and design</li>
+      <li>Reusable pattern available to other Workday mobile teams without re-solving density from scratch</li>
+    </ul>
   </div>
 
   <!-- 5. Scaling with Cursor -->
@@ -253,32 +248,72 @@
   <h2>Let's connect.</h2>
   <p>Open to <strong>principal / senior IC</strong> roles in <strong>workflow-heavy</strong> and <strong>agentic enterprise UX</strong>—mobile, web, and systems thinking.</p>
   <div class="footer-inline-links">
-    <a href="resume.pdf?v=20260320" target="_blank" rel="noopener">Resume PDF</a>
+    <a href="resume.pdf?v=20260420" target="_blank" rel="noopener">Resume PDF</a>
     <span aria-hidden="true"> · </span>
     <a href="mailto:Eric.chakho.wong@gmail.com">Email</a>
     <span aria-hidden="true"> · </span>
     <a href="https://www.linkedin.com/in/zehao-eric-huang/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </div>
   <a class="footer-cta" href="mailto:Eric.chakho.wong@gmail.com">Get in touch →</a>
-  <div class="footer-note">Eric Huang · Senior UX Designer · Workday<br />Last updated April 2026</div>
+  <div class="footer-note">Eric Huang · Senior Product Designer · Workday<br />Last updated April 2026</div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => {
-      if (e.isIntersecting) {
+  // For the curious
+  console.log('%c👋 You opened DevTools.', 'font-size:13px;font-weight:700;color:#18181B');
+  console.log('%cGood instinct — inspecting systems is exactly how I work too.', 'font-size:12px;color:#52525B');
+  console.log('%ceric.chakho.wong@gmail.com  ·  linkedin.com/in/zehao-eric-huang', 'font-size:12px;color:#1A56DB');
+
+  // Nav scroll-depth + logo morph
+  (function () {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    const header = document.querySelector('.cs-header');
+    let ticking = false;
+    function update() {
+      const y = window.scrollY;
+      nav.classList.toggle('nav--scrolled', y > 50);
+      if (header) nav.classList.toggle('nav--past-header', y > header.offsetTop + header.offsetHeight);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+    update();
+  })();
+
+  // Scroll progress bar
+  (function () {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let ticking = false;
+    function update() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0) + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+  })();
+
+  // Scroll-reveal for case study sections
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (!e.isIntersecting) return;
         e.target.style.opacity = '1';
         e.target.style.transform = 'translateY(0)';
-      }
-    }),
-    { threshold: 0.1 }
-  );
-  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery, .cs-overview, .cs-cursor-chapter, .cs-live-demo').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    observer.observe(el);
-  });
+        observer.unobserve(e.target);
+      }),
+      { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.block, .callout, .quote-block, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery, .cs-overview, .cs-cursor-chapter, .cs-live-demo, .cs-chapter-heading').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = `opacity 0.72s ${ease}, transform 0.72s ${ease}`;
+      observer.observe(el);
+    });
+  })();
 
   // Live demo: quick-jump buttons change the iframe's hash route
   (function () {

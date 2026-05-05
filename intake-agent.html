@@ -18,17 +18,23 @@
 <!-- ─── NAV ─── -->
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Eric Huang</a>
+    <div class="nav-logo-wrap">
+      <a href="index.html" class="nav-logo">Eric Huang</a>
+      <a href="index.html" class="nav-back">← All projects</a>
+    </div>
     <ul class="nav-links">
       <li><a href="index.html#work">Work</a></li>
-      <li><a href="resume.pdf?v=20260320" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a></li>
+      <li><a href="resume.pdf?v=20260420" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a></li>
     </ul>
   </div>
 </nav>
 
+<!-- ─── SCROLL PROGRESS ─── -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <!-- ─── BREADCRUMB ─── -->
 <div class="breadcrumb">
-  <a href="index.html">← All projects</a>
+  <a href="index.html"><span class="back-arrow">←</span> All projects</a>
   <span class="sep">/</span>
   <span class="current">Intake Agent</span>
 </div>
@@ -40,7 +46,6 @@
     <div class="cs-header-brand">
       <img class="cs-brand-logo" src="images/workday-logo.jpg" width="56" height="56" alt="Workday" decoding="async" loading="eager" />
     </div>
-    <div class="cs-year-badge">Case Study 01 · First shipped ~2024</div>
     <h2>Intake <em>Agent</em></h2>
     <div class="cs-meta-strip">
       <div class="cs-meta-item"><div class="cs-meta-key">Company</div><div class="cs-meta-val">Workday</div></div>
@@ -56,56 +61,77 @@
       <span class="tag">Trust &amp; transparency</span>
       <span class="tag">Desktop</span>
     </div>
-    <div class="cs-overview">
-      <div class="cs-overview-item">
-        <div class="block-label">Design problem</div>
-        <p>Employees bounced between wikis, forms, and chat to figure out <em>what they were allowed to do</em>. Generic “AI” answers felt risky without proof.</p>
-      </div>
-      <div class="cs-overview-item">
-        <div class="block-label">Outcome</div>
-        <p>Shipped ~2024 onward: one page with shortcuts + search + an assistant, then shopping and forms <em>inside the same chat</em>. Admins set rules, test prompts, and watch usage.</p>
-      </div>
-      <div class="cs-overview-item">
-        <div class="block-label">My contributions</div>
-        <p>Lead UX for chat patterns, trust (sources, “don’t guess”), page structure, and admin tools—with PM, engineering, research, and data science.</p>
-      </div>
-    </div>
-    <p>
-      I led UX for an assistant that answers company buying questions using official docs, suggests a clear next step, and later keeps checkout-style tasks in one thread. Admins control where people go when the model should stop.
-    </p>
   </div>
 
-  <!-- My Role -->
-  <div class="my-role-block">
-    <div class="my-role-icon">👤</div>
-    <div class="my-role-content">
-      <div class="block-label">My Contributions</div>
-      <p>I owned how each reply looks and behaves—errors, sources, when to ask instead of guess—and the admin side (routing, test sandbox, analytics). Day-to-day with PM, engineering, research, and data science.</p>
-      <div class="my-role-chips">
-        <span class="chip">Chat &amp; assistant UX</span>
-        <span class="chip">Trust &amp; safety patterns</span>
-        <span class="chip">Page layout (shortcuts + chat)</span>
-        <span class="chip">Admin tools</span>
-        <span class="chip">Cross-functional lead</span>
+  <!-- ─── 30-SECOND SNAPSHOT ─── -->
+  <div class="cs-snapshot">
+    <div class="block-label">30-second read</div>
+    <div class="cs-snapshot-beats">
+      <div class="cs-snapshot-beat">
+        <span class="cs-snapshot-num">01</span>
+        <div>
+          <strong>The problem</strong>
+          <p>Employees navigated wikis, forms, and Slack to figure out what they were allowed to buy. Wrong answers aren't just frustrating — they have real compliance and financial consequences.</p>
+        </div>
+      </div>
+      <div class="cs-snapshot-beat">
+        <span class="cs-snapshot-num">02</span>
+        <div>
+          <strong>The critical decision</strong>
+          <p>We rejected a pure chatbot. Procurement isn't a Q&amp;A problem — it's a workflow problem. The assistant needed to know the rules, cite its sources, and hand people off to the right next step in the existing system.</p>
+        </div>
+      </div>
+      <div class="cs-snapshot-beat">
+        <span class="cs-snapshot-num">03</span>
+        <div>
+          <strong>The system</strong>
+          <p>Intake Agent is the front door of a connected procurement loop. Compliance rules shape what the assistant says. Answers route users into catalog, forms, or approvals. Usage analytics flow back to help admins improve those rules. One thread — the whole procurement system behind it.</p>
+        </div>
+      </div>
+      <div class="cs-snapshot-beat">
+        <span class="cs-snapshot-num">04</span>
+        <div>
+          <strong>Shipped</strong>
+          <p>Two major releases (2024–2026). Policy-grounded answers with sources, in-chat catalog and forms, admin routing table, test sandbox, and analytics.</p>
+        </div>
       </div>
     </div>
+    <div class="cs-snapshot-gallery">
+      <figure class="cs-figure">
+        <img src="images/intake-agent/01-landing-quick-links.png" alt="Landing page with search, shortcuts, and assistant" width="1024" height="711" loading="lazy" decoding="async" />
+        <figcaption><strong>User side</strong> — one entry point for answers, shortcuts, and tasks.</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/09-admin-routing-table.png" alt="Admin routing table controlling where each topic sends users" width="1024" height="679" loading="lazy" decoding="async" />
+        <figcaption><strong>System side</strong> — admins control routing, rules, and what the assistant can say.</figcaption>
+      </figure>
+    </div>
+    <div class="cs-snapshot-cta">
+      <a href="#full-story" class="cs-expand-btn">Read full case study ↓</a>
+    </div>
+  </div>
+  <!-- ─── END SNAPSHOT ─── -->
+
+
+  <div class="cs-chapter-heading" id="full-story">
+    <span class="cs-chapter-num">01</span>
+    <h3>The problem</h3>
+  <p class="cs-chapter-sub">What research made clear and where it pointed</p>
   </div>
 
   <!-- Problem → Vision -->
   <div class="block">
-    <div class="block-label">The Problem</div>
     <h3>Too many doors, not enough answers</h3>
     <p>People asked the same questions over and over. Answers were scattered across tools and Slack—slow to find and easy to get wrong.</p>
   </div>
 
   <!-- Research: context for exploration + solution -->
-  <div class="block">
+  <div class="block block--tight-after">
     <div class="block-label">Research &amp; Insights</div>
-    <h3>What interviews made obvious</h3>
-    <p>We paired research with working sessions across PM, engineering, research, and data science—so v1 shipped guardrails for when the assistant must stop, not only happy-path chat.</p>
+    <h3>What research showed</h3>
   </div>
 
-  <ul class="insight-list">
+  <ul class="insight-list insight-list--dense">
     <li>
       <div class="insight-icon">📊</div>
       <span>Internal support teams said half their week was repeat “how do I…?” questions.</span>
@@ -120,193 +146,117 @@
     </li>
   </ul>
 
-  <div class="callout accent-left">
-    <div class="block-label">The Vision</div>
-    <p style="font-size:17px; font-weight:600; color:var(--ink); line-height:1.5; margin-bottom:8px;">Right answer, right path—fast.</p>
-    <p style="color:var(--ink-secondary); font-size:15px;">Help people finish buying tasks with a clear answer and a sensible next click. Give admins ways to configure and test before anything hits employees.</p>
+
+  <div class="cs-chapter-heading">
+    <span class="cs-chapter-num">02</span>
+    <h3>Exploration</h3>
+  <p class="cs-chapter-sub">What we tried, what we ruled out, and what held up</p>
   </div>
 
   <!-- Legacy-first draft — bridges problem → vision -->
   <div class="block">
-    <div class="block-label">Exploration</div>
-    <h3>Early idea: form-first</h3>
-    <p>
-      We tried search → radio buttons before any answer. Experts liked it; most people had to guess labels before they even knew what they needed.
-    </p>
-    <figure class="cs-figure cs-figure-legacy">
-      <img src="images/intake-agent/06-legacy-start-purchase-draft.png" alt="Exploration screen: search, radio options for request type, then a fixed next action" width="852" height="942" loading="lazy" decoding="async" />
-      <figcaption>Exploration: search → radios → fixed next step (placeholder copy).</figcaption>
-    </figure>
+    <div class="block-label">Rejected direction</div>
+    <h3>Form-first</h3>
+    <div class="sc-compare-card" style="margin-top: 20px;">
+      <div class="sc-col-visual sc-col-visual--after">
+        <img src="images/intake-agent/06-legacy-start-purchase-draft.png" alt="Exploration screen: search, radio options for request type, then a fixed next action" class="sc-after-img" loading="lazy" decoding="async" />
+      </div>
+      <div class="sc-col-bullets">
+        <p class="sc-desc-p">Structured forms worked when users already knew what they needed. For everyone else, choosing a request type on step one was a dead end.</p>
+        <ul class="sc-bullets sc-bullets--x">
+          <li>New hires didn't know which category to pick</li>
+          <li>No way to ask "is this allowed?" before committing to a path</li>
+          <li>Radio buttons assumed request types were fixed and knowable</li>
+          <li>Same rigid structure regardless of request complexity</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <!-- Today's Focus -->
+  <!-- Before → After (scroll compare) -->
+  <div class="sc-outer" id="sc-compare">
+    <div class="sc-sticky">
+
+      <div class="sc-header">
+        <div class="block-label">Design evolution</div>
+        <h3 class="sc-title">No guidance built in</h3>
+        <div class="sc-tabs" role="presentation">
+          <span class="sc-tab sc-tab--before">You're on your own</span>
+          <span class="sc-tab-arrow" aria-hidden="true">→</span>
+          <span class="sc-tab sc-tab--after">Hybrid shortcuts + assistant</span>
+        </div>
+      </div>
+
+      <div class="sc-body">
+        <div class="sc-compare-card">
+          <div class="sc-visual-stage">
+            <div class="sc-visual-flip">
+              <div class="sc-vis-face sc-vis-face--before sc-col-visual sc-col-visual--before">
+                <div class="comp-label">Before</div>
+                <h4>You're on your own</h4>
+                <div class="before-pill-field pill-scatter-field" aria-hidden="true">
+                  <span class="before-drift-wrap"><span class="before-drift-pill"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Search the wiki</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="3" width="3.5" height="10" rx="1.75"/><rect x="15.5" y="11" width="3.5" height="10" rx="1.75"/><rect x="3" y="5" width="10" height="3.5" rx="1.75"/><rect x="11" y="15.5" width="10" height="3.5" rx="1.75"/></svg>Ask on Slack</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Get no answer</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="9" x2="9" y2="21"/></svg>Open a form</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Wrong guidance</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Ask again</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Escalate to manager</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Wait for reply</span></span>
+                </div>
+              </div>
+              <div class="sc-vis-face sc-vis-face--after sc-col-visual sc-col-visual--after">
+                <div class="comp-label">After</div>
+                <h4>Hybrid shortcuts + assistant</h4>
+                <div class="after-pill-field pill-scatter-field" aria-hidden="true">
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Quick Links</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Search or ask</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Side assistant</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Role-tuned prompts</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Sources on answers</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Open internal catalog</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">One next step</span></span>
+                  <span class="before-drift-wrap"><span class="before-drift-pill">Admin entry points</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sc-col-copy-wrap">
+            <div class="sc-copy-track">
+              <div class="sc-copy-slab sc-copy-slab--before">
+                <p class="sc-desc-p">Requisition is a governed workflow — not a chatbot brief. Chat-style surfaces couldn’t keep answers in policy context or hand off the next real step with confidence.</p>
+                <ul class="sc-bullets sc-bullets--x">
+                  <li>Policy, catalog, and approvals — not one-off Q&amp;A</li>
+                  <li>Weak ties to sources and deterministic routing</li>
+                  <li>Jargon and tool knowledge before useful help</li>
+                  <li>Little bridge into forms, catalog, or approvals</li>
+                </ul>
+              </div>
+              <div class="sc-copy-slab sc-copy-slab--after">
+                <p class="sc-desc-p">One entry point built for everyone. Admin-curated shortcuts surface repeat tasks. Role-tuned suggestions load on arrival.</p>
+                <ul class="sc-bullets sc-bullets--check">
+                  <li>Quick Links for repeat tasks (admin-curated)</li>
+                  <li>Role-tuned suggested questions on first load</li>
+                  <li>Works for newcomers and power users alike</li>
+                  <li>Correct, boring answers beat clever guesses</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Reply patterns -->
   <div class="block">
-    <div class="block-label">Scope</div>
-    <h3>What we optimized for</h3>
+    <div class="block-label">Reply patterns</div>
+    <h3>Each assistant turn does exactly one thing</h3>
+    <p>Direct answer + one action. No buried CTAs, no guessing.</p>
   </div>
 
-  <div class="focus-grid">
-    <div class="focus-item">
-      <span class="focus-item-title">Plain-language questions</span>
-      Let people type how they talk.
-    </div>
-    <div class="focus-item">
-      <span class="focus-item-title">Point to the right place</span>
-      Suggest the internal flow or page that fits their case.
-    </div>
-    <div class="focus-item">
-      <span class="focus-item-title">Admin: rules</span>
-      Decide where people go—and when the assistant should stop.
-    </div>
-    <div class="focus-item">
-      <span class="focus-item-title">Admin: sandbox</span>
-      Try prompts before employees see them.
-    </div>
-    <div class="focus-item">
-      <span class="focus-item-title">Admin: metrics</span>
-      See what works and what breaks.
-    </div>
-    <div class="focus-item">
-      <span class="focus-item-title">Later</span>
-      Smarter suggestions from real usage (future work).
-    </div>
-  </div>
-
-  <!-- Before → After -->
-  <div class="block">
-    <div class="block-label">Design Evolution</div>
-    <h3>Why we didn’t ship “chat only”</h3>
-    <p>Open chat forced people to know internal jargon. We shipped Quick Links + search + assistant: shortcuts for repeat tasks, chat for everything else.</p>
-  </div>
-
-  <div class="comparison-grid">
-    <div class="comparison-card">
-      <div class="comp-label">Before</div>
-      <h4>Open chat only</h4>
-      <ul>
-        <li>Sample prompts, but no shortcuts</li>
-        <li>Easy to get stuck if you don’t know the jargon</li>
-        <li>Admins couldn’t pin common tasks</li>
-        <li>Same experience for every role</li>
-      </ul>
-    </div>
-    <div class="comparison-card after">
-      <div class="comp-label">After</div>
-      <h4>Hybrid (shortcuts + assistant)</h4>
-      <ul>
-        <li>Quick Links for repeat tasks (admin-curated)</li>
-        <li>Suggested questions tuned to the person’s role</li>
-        <li>Works for newcomers and power users</li>
-        <li>Correct, boring answers beat clever guesses</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- First ship UI — illustrates hybrid model above -->
-  <div class="block">
-    <div class="block-label">Phase 1 · First ship · ~2024</div>
-    <h3>First ship: one page, three entry points</h3>
-    <p>
-      Phase 1: Quick Links, search, and a side assistant. Replies tie back to uploaded company docs, show sources, and offer a next step (e.g. open an internal catalog or form).
-    </p>
-
-    <div class="cs-gallery">
-      <figure class="cs-figure">
-        <img src="images/intake-agent/01-landing-quick-links.png" alt="Landing page with greeting, search, and shortcut links for common buying tasks" width="1024" height="711" loading="lazy" decoding="async" />
-        <figcaption>Landing: search + shortcuts for common tasks.</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/02-search-po-query.png" alt="Same landing with a typed question about how to create a purchase order" width="1024" height="711" loading="lazy" decoding="async" />
-        <figcaption>Same page: ask in plain language (example: how to create a purchase order).</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/03-agent-thinking.png" alt="Side chat panel with the user’s question and a loading state" width="1024" height="711" loading="lazy" decoding="async" />
-        <figcaption>Side panel: assistant is working.</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/04-agent-po-answer.png" alt="Agent response explaining purchase orders with sources and feedback controls" width="1024" height="711" loading="lazy" decoding="async" />
-        <figcaption>Answer + sources—so people can verify before they act.</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/05-agent-catalog-action.png" alt="Assistant suggesting opening the approved-items catalog for a laptop request" width="1024" height="711" loading="lazy" decoding="async" />
-        <figcaption>Suggested action (e.g. browse approved items).</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <!-- Phase 2: In-agent transactions (catalog + non-catalog forms) -->
-  <div class="block">
-    <div class="block-label">Phase 2 · Requester experience</div>
-    <h3>Phase 2: finish the task in chat</h3>
-    <p>
-      People can pick items, fill structured forms, and get confirmations without leaving the thread.
-    </p>
-
-    <div class="cs-gallery">
-      <figure class="cs-figure">
-        <img src="images/intake-agent/13-phase2-catalog-requisition.png" alt="Chat thread showing catalog line items, submit button, and in-thread confirmation with reference number" width="1024" height="711" loading="lazy" decoding="async" />
-        <figcaption>Approved catalog → submit request — review quantities, submit, confirmation in-thread.</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/14-phase2-noncatalog-request-form.png" alt="Structured request form embedded in the chat for items not in the catalog" width="1024" height="711" loading="lazy" decoding="async" />
-        <figcaption>Off-catalog request — structured form in chat when there’s no standard item.</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/15-phase2-noncatalog-pricing.png" alt="Pricing step in the same chat thread with quantity, price, and confirm action" width="1024" height="711" loading="lazy" decoding="async" />
-        <figcaption>Next step in the same thread — e.g. pricing — without losing context.</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <!-- Admin console: policy, routing URLs, fallbacks, evaluation -->
-  <div class="block">
-    <div class="block-label">Admin experience</div>
-    <h3>What admins control</h3>
-    <p>
-      Admins upload official documents (so answers aren’t invented), set where each topic sends people (stay in-product or open another trusted URL), define when the assistant must stop, test prompts in a sandbox, then use analytics after launch.
-    </p>
-
-    <div class="cs-gallery">
-      <figure class="cs-figure">
-        <img src="images/intake-agent/07-admin-upload-document.png" alt="Admin screen to name and upload source documents for assistant answers" width="1024" height="686" loading="lazy" decoding="async" />
-        <figcaption>Upload document — source material for answers (DOCX/PDF or paste).</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/08-admin-policy-processing.png" alt="Processing state while an uploaded document is analyzed" width="1024" height="686" loading="lazy" decoding="async" />
-        <figcaption>Processing state—sets expectations for long uploads.</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/09-admin-routing-table.png" alt="Routing table overview showing topics, destinations, and whether each appears as a home-page shortcut" width="1024" height="679" loading="lazy" decoding="async" />
-        <figcaption>Routing table — at-a-glance routes, in-app vs external, Quick Link on/off.</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/10-admin-routing-rules-editor.png" alt="Route editor: stay in app or open an external link, plus shortcut label settings" width="1024" height="685" loading="lazy" decoding="async" />
-        <figcaption>Route detail — in-app vs external link; text for the home-page shortcut.</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/11-admin-testing-playground.png" alt="Sandbox where admins type sample questions to test routing before launch" width="1024" height="679" loading="lazy" decoding="async" />
-        <figcaption>Test sandbox — try prompts before go-live.</figcaption>
-      </figure>
-      <figure class="cs-figure">
-        <img src="images/intake-agent/12-admin-analytics-dashboard.png" alt="Analytics dashboard showing suggested-action clicks, reported issues, and frequent questions" width="1024" height="790" loading="lazy" decoding="async" />
-        <figcaption>Analytics — what’s working, what’s breaking.</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <!-- Conversational design (maps to principal conversational / agentic roles) -->
-  <div class="block">
-    <div class="block-label">Conversational design</div>
-    <h3>Conversation design, not just pixels</h3>
-    <p>
-      Layout is <em>where</em> the chat lives; conversation design is <em>what each turn does</em>. Beyond the frame, I defined how assistant turns read, what controls appear in a turn, and how state carries across steps. Ambiguous question? Ask first, don’t bluff.
-    </p>
-
-    <h4 class="aspect-title">From text replies to text + action</h4>
-    <p>
-      Early patterns centered on a <em>scannable text answer</em>: short paragraphs, tight hierarchy, and plain language so people could compare what they read to what they already knew. The next iteration paired that text with a <em>primary call-to-action button</em>—one obvious “do this next” control so the path forward wasn’t buried at the end of a long message.
-    </p>
-    <div class="convo-flow" aria-label="Mockup: text answer plus primary action">
+  <div class="convo-flow" aria-label="Mockup: text answer plus primary action">
       <div class="convo-turn user">
         <div class="convo-role">User</div>
         I need a laptop for my new hire.
@@ -332,10 +282,7 @@
       </div>
     </div>
 
-    <h4 class="aspect-title">Richer turn types in Phase 2</h4>
-    <p>
-      As work moved into the same thread, assistant turns had to behave more like lightweight UI, not only prose. I introduced and stress-tested structured patterns inside the chat: <em>in-chat form fields</em> for requests that need specifics, <em>dropdowns and option lists</em> when the safest path is a constrained choice, and <em>catalog-style layouts</em> (line items, quantities, summaries) so people could review what they were buying without jumping to another surface. Each type had to preserve thread context so a multi-step flow still felt like one conversation.
-    </p>
+    <h4 class="aspect-title">Phase 2 — richer turns: forms, choices, catalog</h4>
     <div class="convo-flow" aria-label="Mockup: in-chat form, dropdown choice, and catalog lines in one turn">
       <div class="convo-turn user">
         <div class="convo-role">User</div>
@@ -383,6 +330,165 @@
         </div>
       </div>
     </div>
+
+
+  <div class="cs-chapter-heading">
+    <span class="cs-chapter-num">03</span>
+    <h3>The system</h3>
+  <p class="cs-chapter-sub">Admin side first — the rules that make the user experience possible</p>
+  </div>
+
+  <!-- Admin console: policy, routing URLs, fallbacks, evaluation -->
+  <div class="block">
+    <div class="block-label">Admin experience</div>
+    <h3>What admins configure</h3>
+    <p>
+      The assistant is only as good as its rules. Admins upload official docs (grounding answers in real policy), set routing per topic, define when the assistant must stop, then test everything in a sandbox before any employee sees it. Analytics close the loop after launch.
+    </p>
+  </div>
+
+  <!-- System loop diagram -->
+  <div class="cs-loop-diagram" role="img" aria-label="System loop: admin configures rules, users get grounded answers, analytics feed back to admin">
+    <div class="cs-loop-track">
+      <div class="cs-loop-lane-label">Admin</div>
+      <div class="cs-loop-nodes">
+        <div class="cs-loop-node">
+          <span class="cs-loop-node-label">01</span>
+          <span class="cs-loop-node-text">Upload docs</span>
+        </div>
+        <div class="cs-loop-connector-h" aria-hidden="true"></div>
+        <div class="cs-loop-node">
+          <span class="cs-loop-node-label">02</span>
+          <span class="cs-loop-node-text">Set routing rules</span>
+        </div>
+        <div class="cs-loop-connector-h" aria-hidden="true"></div>
+        <div class="cs-loop-node">
+          <span class="cs-loop-node-label">03</span>
+          <span class="cs-loop-node-text">Test in sandbox</span>
+        </div>
+      </div>
+    </div>
+    <div class="cs-loop-bridge" aria-hidden="true">
+      <div class="cs-loop-bridge-line cs-loop-bridge-line--down"></div>
+      <div class="cs-loop-bridge-line cs-loop-bridge-line--up"></div>
+    </div>
+    <div class="cs-loop-track">
+      <div class="cs-loop-lane-label">User</div>
+      <div class="cs-loop-nodes">
+        <div class="cs-loop-node">
+          <span class="cs-loop-node-label">04</span>
+          <span class="cs-loop-node-text">Ask a question</span>
+        </div>
+        <div class="cs-loop-connector-h" aria-hidden="true"></div>
+        <div class="cs-loop-node">
+          <span class="cs-loop-node-label">05</span>
+          <span class="cs-loop-node-text">Grounded answer + sources</span>
+        </div>
+        <div class="cs-loop-connector-h" aria-hidden="true"></div>
+        <div class="cs-loop-node">
+          <span class="cs-loop-node-label">06</span>
+          <span class="cs-loop-node-text">Take next step</span>
+        </div>
+        <div class="cs-loop-connector-h" aria-hidden="true"></div>
+        <div class="cs-loop-node cs-loop-node--analytics">
+          <span class="cs-loop-node-label">07</span>
+          <span class="cs-loop-node-text">Analytics</span>
+        </div>
+      </div>
+    </div>
+    <div class="cs-loop-return" aria-hidden="true">
+      <div class="cs-loop-return-arrow"></div>
+      <span class="cs-loop-return-label">closes the loop — admin refines rules</span>
+    </div>
+  </div>
+
+
+  <div class="cs-gallery">
+      <figure class="cs-figure">
+        <img src="images/intake-agent/07-admin-upload-document.png" alt="Admin screen to name and upload source documents for assistant answers" width="1024" height="686" loading="lazy" decoding="async" />
+        <figcaption>Upload document — source material for answers (DOCX/PDF or paste).</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/08-admin-policy-processing.png" alt="Processing state while an uploaded document is analyzed" width="1024" height="686" loading="lazy" decoding="async" />
+        <figcaption>Processing state—sets expectations for long uploads.</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/09-admin-routing-table.png" alt="Routing table overview showing topics, destinations, and whether each appears as a home-page shortcut" width="1024" height="679" loading="lazy" decoding="async" />
+        <figcaption>Routing table — at-a-glance routes, in-app vs external, Quick Link on/off.</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/10-admin-routing-rules-editor.png" alt="Route editor: stay in app or open an external link, plus shortcut label settings" width="1024" height="685" loading="lazy" decoding="async" />
+        <figcaption>Route detail — in-app vs external link; text for the home-page shortcut.</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/11-admin-testing-playground.png" alt="Sandbox where admins type sample questions to test routing before launch" width="1024" height="679" loading="lazy" decoding="async" />
+        <figcaption>Test sandbox — try prompts before go-live.</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/12-admin-analytics-dashboard.png" alt="Analytics dashboard showing suggested-action clicks, reported issues, and frequent questions" width="1024" height="790" loading="lazy" decoding="async" />
+        <figcaption>Analytics — what’s working, what’s breaking.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- First ship UI — illustrates hybrid model above -->
+  <div class="block">
+    <div class="block-label">Phase 1 · First ship · ~2024</div>
+    <h3>One page, three entry points</h3>
+    <p>
+      Phase 1: Quick Links, search, and a side assistant. Replies tie back to uploaded company docs, show sources, and offer a next step (e.g. open an internal catalog or form).
+    </p>
+
+    <div class="cs-gallery">
+      <figure class="cs-figure">
+        <img src="images/intake-agent/01-landing-quick-links.png" alt="Landing page with greeting, search, and shortcut links for common buying tasks" width="1024" height="711" loading="lazy" decoding="async" />
+        <figcaption>Landing: search + shortcuts for common tasks.</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/02-search-po-query.png" alt="Same landing with a typed question about how to create a purchase order" width="1024" height="711" loading="lazy" decoding="async" />
+        <figcaption>Same page: ask in plain language (example: how to create a purchase order).</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/03-agent-thinking.png" alt="Side chat panel with the user’s question and a loading state" width="1024" height="711" loading="lazy" decoding="async" />
+        <figcaption>Side panel: assistant is working.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- Phase 2: In-agent transactions (catalog + non-catalog forms) -->
+  <div class="block">
+    <div class="block-label">Phase 2 · Requester experience</div>
+    <h3>Finish the task in chat</h3>
+    <p>
+      People can pick items, fill structured forms, and get confirmations without leaving the thread.
+    </p>
+
+    <div class="cs-gallery">
+      <figure class="cs-figure">
+        <img src="images/intake-agent/13-phase2-catalog-requisition.png" alt="Chat thread showing catalog line items, submit button, and in-thread confirmation with reference number" width="1024" height="711" loading="lazy" decoding="async" />
+        <figcaption>Approved catalog → submit request — review quantities, submit, confirmation in-thread.</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/14-phase2-noncatalog-request-form.png" alt="Structured request form embedded in the chat for items not in the catalog" width="1024" height="711" loading="lazy" decoding="async" />
+        <figcaption>Off-catalog request — structured form in chat when there’s no standard item.</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/intake-agent/15-phase2-noncatalog-pricing.png" alt="Pricing step in the same chat thread with quantity, price, and confirm action" width="1024" height="711" loading="lazy" decoding="async" />
+        <figcaption>Next step in the same thread — e.g. pricing — without losing context.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="cs-chapter-heading">
+    <span class="cs-chapter-num">04</span>
+    <h3>Craft</h3>
+  <p class="cs-chapter-sub">Conversation design, trust patterns, and interaction decisions</p>
+  </div>
+
+  <!-- Conversational design -->
+  <div class="block">
+    <div class="block-label">Conversational design</div>
+    <h3>Three design decisions</h3>
 
     <h4 class="aspect-title">Thumbs up / down as a tuning signal</h4>
     <p>
@@ -503,95 +609,40 @@
   <!-- Trust Building -->
   <div class="callout green-left">
     <div class="block-label">Core design principle</div>
-    <p style="font-size:17px; font-weight:600; color:var(--ink); line-height:1.5; margin-bottom:8px;">Trust has to be designed in.</p>
-    <p style="color:var(--ink-secondary); font-size:15px;">Buying rules are high stakes. The UI shows sources, admits uncertainty when needed, and uses safe fallbacks—not blind trust in the model.</p>
-  </div>
-
-  <div class="block">
-    <div class="block-label">Inclusive interaction</div>
-    <h3>Accessibility</h3>
-    <p>Keyboard order, visible focus, and readable “sources” blocks—so trust wasn’t only a model problem; it was something we built with engineering.</p>
+    <p class="callout-lead">Trust has to be designed in.</p>
+    <p class="callout-body">Buying rules are high stakes. The UI shows sources, admits uncertainty when needed, and uses safe fallbacks — not blind trust in the model.</p>
   </div>
 
   <!-- Quote -->
   <div class="quote-block">
     <div class="quote-mark">"</div>
-    <blockquote>“I’m not bouncing between three systems—the answer comes with sources, and the next step actually moves things forward.”</blockquote>
+    <blockquote>I’m not bouncing between three systems—the answer comes with sources, and the next step actually moves things forward.</blockquote>
     <div class="quote-source">— Pilot participant, first week</div>
   </div>
 
-  <!-- Evaluation & iteration (agentic / conversational IC signals) -->
+  <div class="cs-chapter-heading">
+    <span class="cs-chapter-num">05</span>
+    <h3>Outcomes</h3>
+    <p class="cs-chapter-sub">What shipped, what we measured, and what we'd do differently</p>
+  </div>
+
+  <!-- Outcomes -->
   <div class="block">
-    <div class="block-label">Evaluation &amp; iteration</div>
-    <h3>Test, ship, measure, fix</h3>
-    <p>
-      Admins used the sandbox before launch; after launch, analytics and thumbs on replies told us what to fix in rules and docs.
-    </p>
-    <ul class="checklist" style="margin-top:12px;max-width:var(--prose-max);">
-      <li>Rehearse risky paths before employees see them</li>
-      <li>Spell out when the system must not guess</li>
-      <li>Iterate with PM, engineering, and data—not one-and-done copy</li>
+    <div class="block-label">Impact</div>
+    <h3>What shipped</h3>
+    <ul class="checklist">
+      <li>Two major releases: hybrid landing page (2024), then in-chat catalog and forms (2026)</li>
+      <li>One consolidated entry point for answers, next steps, and checkout — policy-grounded, with explicit stop rules</li>
+      <li>Admin tooling (upload, routing, sandbox, analytics) shipped with v1 — not as a follow-on</li>
+      <li>Adopted by the Workday procurement team; extended as a reusable pattern for other assistant surfaces</li>
     </ul>
-  </div>
-
-  <!-- Metrics -->
-  <div class="block">
-    <div class="block-label">Outcome &amp; Impact</div>
-    <h3>Results after launch</h3>
-  </div>
-
-  <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="metric-number">2</div>
-      <div class="metric-label">Two major releases: hybrid page first, then in-chat shopping and forms</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-number">1</div>
-      <div class="metric-label">One primary place for answers, next steps, and (later) checkout—doc-grounded, with clear stop rules</div>
-    </div>
-  </div>
-
-  <!-- Key Highlights -->
-  <div class="block">
-    <div class="block-label">Key Highlights</div>
-    <h3>Takeaways</h3>
-  </div>
-
-  <div class="kh-grid">
-    <div class="kh-card">
-      <div class="kh-number">01</div>
-      <h4>Shortcuts + chat</h4>
-      <p>Repeat tasks get buttons; messy questions get the assistant.</p>
-    </div>
-    <div class="kh-card">
-      <div class="kh-number">02</div>
-      <h4>Admin shipped with v1</h4>
-      <p>Rules and testing weren’t “phase 3”—bad first answers would sink the product.</p>
-    </div>
-    <div class="kh-card">
-      <div class="kh-number">03</div>
-      <h4>Show your work</h4>
-      <p>Sources and clear limits beat a flashy demo.</p>
-    </div>
-    <div class="kh-card">
-      <div class="kh-number">04</div>
-      <h4>Reusable pattern</h4>
-      <p>Understand → answer with proof → suggest next step → safe recovery.</p>
-    </div>
-    <div class="kh-card">
-      <div class="kh-number">05</div>
-      <h4>Fit the real job</h4>
-      <p>Default product patterns were too “light” for dense admin + chat. We prototyped until design system and engineering agreed on a shell that matched real buying work.</p>
-    </div>
   </div>
 
   <!-- Reflection -->
   <div class="reflection-block">
     <div class="ref-label">Reflection</div>
     <p>“If the rules don’t match real behavior, the ‘AI’ part doesn’t matter—the experience breaks.”</p>
-    <div class="next-steps">
-      Next: admin live preview; smarter rule hints from usage.
-    </div>
+    <p>What I’d do differently: push for a live admin preview earlier. The sandbox helped, but seeing the full user-facing experience before launch would have caught more rule gaps before employees hit them.</p>
   </div>
 
   <!-- More to the story -->
@@ -610,32 +661,331 @@
   <h2>Let's connect.</h2>
   <p>Open to principal / senior IC roles in workflow-heavy and agentic enterprise UX—mobile, web, and systems thinking.</p>
   <div class="footer-inline-links">
-    <a href="resume.pdf?v=20260320" target="_blank" rel="noopener">Resume PDF</a>
+    <a href="resume.pdf?v=20260420" target="_blank" rel="noopener">Resume PDF</a>
     <span aria-hidden="true"> · </span>
     <a href="mailto:Eric.chakho.wong@gmail.com">Email</a>
     <span aria-hidden="true"> · </span>
     <a href="https://www.linkedin.com/in/zehao-eric-huang/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </div>
   <a class="footer-cta" href="mailto:Eric.chakho.wong@gmail.com">Get in touch →</a>
-  <div class="footer-note">Eric Huang · Senior UX Designer · Workday<br />Last updated April 2026</div>
+  <div class="footer-note">Eric Huang · Senior Product Designer · Workday<br />Last updated April 2026</div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => {
-      if (e.isIntersecting) {
+  // For the curious
+  console.log('%c👋 You opened DevTools.', 'font-size:13px;font-weight:700;color:#18181B');
+  console.log('%cGood instinct — inspecting systems is exactly how I work too.', 'font-size:12px;color:#52525B');
+  console.log('%ceric.chakho.wong@gmail.com  ·  linkedin.com/in/zehao-eric-huang', 'font-size:12px;color:#1A56DB');
+
+  // Nav scroll-depth + logo morph
+  (function () {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    const header = document.querySelector('.cs-header');
+    let ticking = false;
+    function update() {
+      const y = window.scrollY;
+      nav.classList.toggle('nav--scrolled', y > 50);
+      if (header) nav.classList.toggle('nav--past-header', y > header.offsetTop + header.offsetHeight);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+    update();
+  })();
+
+  // Scroll progress bar
+  (function () {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let ticking = false;
+    function update() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0) + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+  })();
+
+  // Scroll compare: discrete before/after + CSS transitions (Corgi 750ms ease).
+  // Crossing raw 0.5 commits the flip/copy; stopping inside the flip band snaps scroll to raw 0 or 1.
+  (function () {
+    const scOuter = document.getElementById('sc-compare');
+    if (!scOuter) return;
+    const scVisualFlip = scOuter.querySelector('.sc-visual-flip');
+    const scCopyTrack = scOuter.querySelector('.sc-copy-track');
+    if (!scVisualFlip || !scCopyTrack) return;
+
+    const mqMobile = window.matchMedia('(max-width: 480px)');
+    const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const FLIP_START = 0.30;
+    const FLIP_END = 0.70;
+
+    let settleTimer = null;
+    let snapCooldownUntil = 0;
+
+    function getScrollMetrics() {
+      const rect = scOuter.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const total = scOuter.offsetHeight - window.innerHeight;
+      if (total <= 0) return null;
+      const raw = Math.max(0, Math.min(1, scrolled / total));
+      const elemTop = window.scrollY + rect.top;
+      return { rect, scrolled, total, raw, elemTop };
+    }
+
+    function update() {
+      const m = getScrollMetrics();
+      if (!m) return;
+
+      scVisualFlip.style.transform = '';
+      scCopyTrack.style.transform = '';
+
+      if (mqMobile.matches || mqReduce.matches) {
+        scOuter.classList.toggle('is-after', m.raw >= 0.5);
+        return;
+      }
+
+      scOuter.classList.toggle('is-after', m.raw >= 0.5);
+    }
+
+    function trySnapScroll() {
+      if (mqMobile.matches || mqReduce.matches) return;
+      if (Date.now() < snapCooldownUntil) return;
+
+      const m = getScrollMetrics();
+      if (!m) return;
+
+      if (m.raw <= FLIP_START || m.raw >= FLIP_END) return;
+
+      const targetRaw = m.raw < 0.5 ? 0 : 1;
+      const targetY = m.elemTop + targetRaw * m.total;
+      if (Math.abs(window.scrollY - targetY) < 4) return;
+
+      snapCooldownUntil = Date.now() + 850;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    }
+
+    function onScroll() {
+      update();
+      if (mqMobile.matches || mqReduce.matches) return;
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(trySnapScroll, 140);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    mqMobile.addEventListener('change', update);
+    mqReduce.addEventListener('change', update);
+    update();
+  })();
+
+  // Scroll-compare pill fields: scatter + drift, placement-only AABB (no drift in overlap math)
+  (function layoutComparePillFields() {
+    const fields = document.querySelectorAll('#sc-compare .pill-scatter-field');
+    if (!fields.length) return;
+
+    const SIZE_CLASSES = ['before-drift-pill--sz-sm', 'before-drift-pill--sz-lg', 'before-drift-pill--sz-xl'];
+    // Small edge margin — drift clipping at the container boundary is fine (overflow:hidden)
+    var DRIFT_EDGE_PX = 4;
+
+    // Seeded PRNG (mulberry32) so layout is identical on every page load
+    function makePRNG(seed) {
+      var s = seed >>> 0;
+      return function () {
+        s += 0x6D2B79F5;
+        var t = s;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+    // Each field gets a fixed seed so before and after look different but are stable
+    var FIELD_SEEDS = [0xABCD1234, 0x5678EF90];
+
+    function makeShuffleRand(rand) {
+      return function shuffle(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(rand() * (i + 1));
+          var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+        }
+        return arr;
+      };
+    }
+
+    // Measure the pill's actual rendered width/height via a hidden clone
+    function measurePill(pill, field) {
+      var clone = pill.cloneNode(true);
+      clone.style.cssText = 'position:absolute;visibility:hidden;left:0;top:0;pointer-events:none;animation:none;transform:none;';
+      clone.classList.remove('before-drift-pill--L', 'before-drift-pill--R');
+      field.appendChild(clone);
+      var r = clone.getBoundingClientRect();
+      field.removeChild(clone);
+      return { pw: Math.max(r.width, 20), ph: Math.max(r.height, 20) };
+    }
+
+    // Shelf packer: greedy first-fit rows. Guarantees zero overlap by construction.
+    // Each row gets a random x-shift (within slack) and rows are shuffled for scatter.
+    function shelfLayout(items, gap, w, h, rand, shuffle) {
+      var MARG_Y = 6; // top/bottom breathing room
+
+      // Pack into rows: each item goes into the first row with enough remaining width
+      var rows = [];
+      items.forEach(function (item) {
+        var placed = false;
+        for (var r = 0; r < rows.length; r++) {
+          var row = rows[r];
+          var newW = row.usedW + gap + item.pw;
+          if (newW <= w) {
+            row.pills.push(item);
+            row.usedW = newW;
+            row.rowH = Math.max(row.rowH, item.ph);
+            placed = true;
+            break;
+          }
+        }
+        if (!placed) {
+          rows.push({ pills: [item], usedW: item.pw, rowH: item.ph });
+        }
+      });
+
+      // Shuffle row order so it doesn't read as sorted-by-size
+      shuffle(rows);
+
+      // Compress vertical gap if rows would overflow the field height
+      var totalRowH = rows.reduce(function (s, r) { return s + r.rowH; }, 0);
+      var availH = Math.max(0, h - MARG_Y * 2);
+      var vGap = rows.length > 1
+        ? Math.max(3, Math.min(gap, (availH - totalRowH) / (rows.length - 1)))
+        : gap;
+      var totalH = totalRowH + Math.max(0, rows.length - 1) * vGap;
+      // Distribute slack vertically: 30% above, 70% below — slight top-heavy for visual balance
+      var yStart = MARG_Y + Math.max(0, availH - totalH) * 0.3;
+      var curY = yStart;
+
+      var result = [];
+      rows.forEach(function (row) {
+        // Random x-shift within the horizontal slack (avoids flush-left look)
+        var slack = Math.max(0, w - row.usedW);
+        var xShift = slack * (0.08 + rand() * 0.84);
+        var cx = xShift;
+        row.pills.forEach(function (item, idx) {
+          if (idx > 0) cx += gap;
+          var px = cx + item.pw / 2;
+          var py = curY + row.rowH / 2;
+          result.push({
+            item: item,
+            spot: { px: px, py: py, pw: item.pw, ph: item.ph,
+                    cx: (px / w) * 100, cy: (py / h) * 100 }
+          });
+          cx += item.pw;
+        });
+        curY += row.rowH + vGap;
+      });
+
+      return result;
+    }
+
+    function layoutField(field, fieldIndex) {
+      var wraps = field.querySelectorAll('.before-drift-wrap');
+      var n = wraps.length;
+      if (!n) return;
+      var r = field.getBoundingClientRect();
+      var w = r.width;
+      var h = r.height;
+      if (w < 60 || h < 60) return; // face not yet visible (e.g. back-face before flip)
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Stable seeded PRNG for this field — layout is identical on every page load
+      var rand = makePRNG(FIELD_SEEDS[fieldIndex % FIELD_SEEDS.length]);
+      var shuffle = makeShuffleRand(rand);
+
+      // Size mix: 1 xl (wide pills), rest of the majority as lg, minority md/sm.
+      // Capping xl at 1 so rows can fit 2 pills side-by-side (xl nearly spans full width).
+      var largeCount = Math.floor(n / 2) + 1;
+      var sizePool = ['xl'];
+      for (var s = 1; s < largeCount; s++) sizePool.push('lg');
+      while (sizePool.length < n) sizePool.push(rand() < 0.62 ? 'md' : 'sm');
+      shuffle(sizePool);
+
+      // Assign sizes, set drift animation, measure all pills
+      var items = [];
+      for (var idx = 0; idx < n; idx++) {
+        var wrap = wraps[idx];
+        var pill = wrap.querySelector('.before-drift-pill');
+        if (!pill) continue;
+        SIZE_CLASSES.forEach(function (c) { pill.classList.remove(c); });
+        var role = sizePool[idx];
+        if (role === 'lg') pill.classList.add('before-drift-pill--sz-lg');
+        else if (role === 'xl') pill.classList.add('before-drift-pill--sz-xl');
+        else if (role === 'sm') pill.classList.add('before-drift-pill--sz-sm');
+        pill.classList.remove('before-drift-pill--L', 'before-drift-pill--R');
+        if (!reduce) {
+          pill.classList.add(rand() < 0.5 ? 'before-drift-pill--L' : 'before-drift-pill--R');
+          pill.style.animationDuration = (20 + rand() * 18) + 's';
+        } else {
+          pill.style.animation = 'none';
+        }
+        var m = measurePill(pill, field);
+        // +16px width margin covers fallback-font vs Inter width difference (~10px) + sub-pixel rounding
+        items.push({ wrap: wrap, pw: Math.ceil(m.pw) + 16, ph: Math.ceil(m.ph) + 1 });
+      }
+
+      // Shelf layout: largest pills first into greedy rows, then rows shuffled + x-shifted
+      items.sort(function (a, b) { return (b.pw * b.ph) - (a.pw * a.ph); });
+      var gap = Math.max(8, Math.min(14, w * 0.028));
+      var placed = shelfLayout(items, gap, w, h, rand, shuffle);
+      placed.forEach(function (entry, step) {
+        entry.item.wrap.style.left = entry.spot.cx + '%';
+        entry.item.wrap.style.top = entry.spot.cy + '%';
+        entry.item.wrap.style.zIndex = String(10 + step);
+      });
+    }
+
+    function layoutAll() {
+      fields.forEach(function (f, i) { layoutField(f, i); });
+    }
+
+    // Run layout once the page has fully loaded (guarantees real getBoundingClientRect values).
+    // Then re-run after fonts.ready for accurate clone measurements.
+    function initLayout() {
+      layoutAll();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(layoutAll);
+      }
+    }
+    if (document.readyState === 'complete') {
+      initLayout();
+    } else {
+      window.addEventListener('load', initLayout, { once: true });
+    }
+    var resizeT = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(layoutAll, 180);
+    }, { passive: true });
+  })();
+
+  // Scroll-reveal for case study sections
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (!e.isIntersecting) return;
         e.target.style.opacity = '1';
         e.target.style.transform = 'translateY(0)';
-      }
-    }),
-    { threshold: 0.1 }
-  );
-  document.querySelectorAll('.block, .callout, .quote-block, .metrics-grid, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-overview').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    observer.observe(el);
-  });
+        observer.unobserve(e.target);
+      }),
+      { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.block, .callout, .quote-block, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .more-story, .cs-overview, .cs-chapter-heading').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = `opacity 0.72s ${ease}, transform 0.72s ${ease}`;
+      observer.observe(el);
+    });
+  })();
 </script>
 
 </body>
