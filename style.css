@@ -1792,10 +1792,10 @@ nav.nav--past-header .nav-back {
 .more-story-badge:hover { background: rgba(255,255,255,.18); }
 
 /* ─── CHECKLIST ─── */
-.checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; }
 .checklist li {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
   font-size: 15px;
   color: var(--ink-secondary);
@@ -2344,6 +2344,130 @@ nav.nav--past-header .nav-back {
   margin-top: 0;
   margin-bottom: 14px;
   font-size: clamp(20px, 2.2vw, 24px);
+}
+
+/* Inventory — tool / collaboration strip (Cursor, Figma MCP, hub, design+eng) */
+.cs-collab-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 20px;
+  align-items: stretch;
+}
+.cs-collab-tile {
+  display: grid;
+  grid-template-rows: 64px auto;
+  justify-items: center;
+  align-content: start;
+  gap: 10px;
+  padding: 14px 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--border);
+  min-height: 0;
+  text-align: center;
+}
+.cs-collab-tile > .cs-collab-tile-top:first-child,
+.cs-collab-tile > .cs-collab-ds-visual:first-child {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: stretch;
+}
+.cs-collab-tile > img.cs-collab-brand:first-child {
+  display: block;
+  width: 40px;
+  height: 40px;
+  max-width: 40px;
+  max-height: 40px;
+  object-fit: contain;
+  place-self: center;
+}
+.cs-collab-brand {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.cs-collab-tile-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 64px;
+}
+.cs-collab-badge {
+  position: absolute;
+  top: -2px;
+  left: calc(50% + 14px);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 3px 5px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+.cs-collab-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  width: 100%;
+}
+.cs-collab-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.cs-collab-sub {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  line-height: 1.35;
+}
+.cs-collab-tile--ds .cs-collab-ds-visual {
+  position: relative;
+  width: 102px;
+  max-width: 100%;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.cs-collab-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+.cs-collab-ds-icon {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 26px;
+  height: 26px;
+  padding: 3px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+@media (max-width: 640px) {
+  .cs-collab-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 /* ─── LIVE DEMO — interactive practice-app embed ─── */
