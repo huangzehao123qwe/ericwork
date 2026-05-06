@@ -13,7 +13,7 @@
   <script src="analytics.js"></script>
   <script src="auth.js"></script>
 </head>
-<body class="cs-plain-prose">
+<body>
 
 <!-- ─── NAV ─── -->
 <nav>
@@ -49,37 +49,77 @@
     <h2>Inventory <em>Stock Picking</em></h2>
     <div class="cs-meta-strip">
       <div class="cs-meta-item"><div class="cs-meta-key">Company</div><div class="cs-meta-val">Workday</div></div>
-      <div class="cs-meta-item"><div class="cs-meta-key">My Role</div><div class="cs-meta-val">Senior UX Designer</div></div>
+      <div class="cs-meta-item"><div class="cs-meta-key">My Role</div><div class="cs-meta-val">Lead UX Designer</div></div>
       <div class="cs-meta-item"><div class="cs-meta-key">Platform</div><div class="cs-meta-val">Mobile (iOS &amp; Android)</div></div>
-      <div class="cs-meta-item"><div class="cs-meta-key">Duration</div><div class="cs-meta-val">2023 – 2024</div></div>
+      <div class="cs-meta-item"><div class="cs-meta-key">Timeline</div><div class="cs-meta-val">2023 – 2024</div></div>
     </div>
     <div class="cs-header-meta">
-      <span class="tag accent">Workflow Automation</span>
-      <span class="tag">Operational Efficiency</span>
-      <span class="tag">Visual Design</span>
-      <span class="tag">Info Architecture</span>
-      <span class="tag">Mobile</span>
+      <span class="tag accent">Pro-user mobile UX</span>
+      <span class="tag">Mobile design system</span>
+      <span class="tag">Component library</span>
+      <span class="tag">Scanner-led interaction</span>
+      <span class="tag">Mobile webview</span>
     </div>
-    <div class="cs-overview">
-      <div class="cs-overview-item">
-        <div class="block-label">The problem</div>
-        <p>Warehouse staff spend full shifts on a phone app that was styled like a casual mobile app—big buttons, lots of empty space. Our users are <em>pros</em>, and every extra tap adds up.</p>
+  </div>
+
+  <!-- ─── 30-SECOND SNAPSHOT ─── -->
+  <div class="cs-snapshot">
+    <div class="block-label">30-second read</div>
+    <div class="cs-snapshot-beats">
+      <div class="cs-snapshot-beat">
+        <span class="cs-snapshot-num">01</span>
+        <div>
+          <strong>The problem</strong>
+          <p>Warehouse staff run full shifts in a phone app built for casual consumers — big buttons, generous padding, one action per screen. For professionals picking thousands of items a day, every unnecessary tap compounds into real time lost.</p>
+        </div>
       </div>
-      <div class="cs-overview-item">
-        <div class="block-label">What shipped</div>
-        <p>After a first, tighter pass didn’t go far enough, I designed a <em>new mobile design system for pro users</em>—denser components built on top of Workday’s web and older mobile libraries. I then applied it to batch pick, with scanner-driven control and auto-advancing fields.</p>
+      <div class="cs-snapshot-beat">
+        <span class="cs-snapshot-num">02</span>
+        <div>
+          <strong>The key decision</strong>
+          <p>Tightening the flow wasn't enough. The first pass proved it — we were polishing steps inside a system built for the wrong user. To move the needle, we had to change the building blocks.</p>
+        </div>
       </div>
-      <div class="cs-overview-item">
-        <div class="block-label">My role</div>
-        <p>Led research, design, and component-level UX with engineering. Built the pro-user mobile library. Later used <em>Cursor</em> (an AI coding assistant) to extend the same library across 21 inventory tasks.</p>
+      <div class="cs-snapshot-beat">
+        <span class="cs-snapshot-num">03</span>
+        <div>
+          <strong>What we built</strong>
+          <p>A new pro-user component layer on top of Workday's existing design system — denser proportions, scanner-first interaction, and a shared registry for both design and engineering. Applied first to batch pick, then extended to 21 inventory tasks.</p>
+        </div>
+      </div>
+      <div class="cs-snapshot-beat">
+        <span class="cs-snapshot-num">04</span>
+        <div>
+          <strong>Shipped</strong>
+          <p>Batch pick redesigned with scanner-driven control and auto-advancing fields. Library adopted across mobile webview teams. First designer at Workday to push components directly to production using Cursor, Lovable, and Figma MCP.</p>
+        </div>
       </div>
     </div>
-    <p>The page follows it in order: <strong>1.</strong> what was wrong · <strong>2.</strong> the first attempt · <strong>3.</strong> building a mobile design system for pros (<a href="#live-demo">try it live</a>) · <strong>4.</strong> the final batch-pick flow · <strong>5.</strong> scaling it with Cursor.</p>
+    <div class="cs-snapshot-gallery">
+      <figure class="cs-figure">
+        <img src="images/inventory-picking/hub-design-system.png" alt="Pro-user mobile design system — component pattern library" width="1024" height="711" loading="lazy" decoding="async" />
+        <figcaption><strong>The design system</strong> — denser components built for shift-long use.</figcaption>
+      </figure>
+      <figure class="cs-figure">
+        <img src="images/inventory-picking/batch-webview-01.jpg" alt="Final batch pick — denser rows, action bar with scanner and Next Item" width="503" height="1024" loading="lazy" decoding="async" />
+        <figcaption><strong>The final task</strong> — scanner drives the flow, thumb barely moves.</figcaption>
+      </figure>
+    </div>
+    <div class="cs-snapshot-cta">
+      <a href="#full-story" class="cs-expand-btn">Read full case study ↓</a>
+    </div>
+  </div>
+  <!-- ─── END SNAPSHOT ─── -->
+
+  <div class="cs-chapter-heading" id="full-story">
+    <span class="cs-chapter-num">01</span>
+    <h3>The problem</h3>
+    <p class="cs-chapter-sub">A consumer-style app used by professionals all shift, every day</p>
   </div>
 
   <!-- 1. Problem (with the current/old mobile screens to show "before") -->
   <div class="block">
-    <div class="block-label">1 · The problem</div>
+    <div class="block-label">The problem</div>
     <h3>A phone app built for casual users, used by pros</h3>
     <p>These screens are the current warehouse picking flow—pick a site, open your list, confirm each item. The layout is perfectly fine if you touch the app now and then. Our users live in it all shift, and the patterns underneath it were shared with consumer-style mobile apps: airy rows, soft generous padding, one action per screen. Every extra tap multiplies across thousands of picks a day.</p>
   </div>
@@ -103,16 +143,28 @@
     </figure>
   </div>
 
+  <div class="cs-chapter-heading">
+    <span class="cs-chapter-num">02</span>
+    <h3>The decision</h3>
+    <p class="cs-chapter-sub">When tightening the flow isn't enough</p>
+  </div>
+
   <!-- 2. First attempt -->
   <div class="block">
-    <div class="block-label">2 · First attempt</div>
+    <div class="block-label">First attempt</div>
     <h3>One item per screen — cleaner, still too spacey</h3>
     <p>The first direction kept the existing mobile components and just simplified the flow: one pick at a time, scanner up top, big quantity keypad. It helped, but we were still tightening steps inside a design system built for casual users. The <em>screen itself</em> stayed airy. The team agreed: to really move the needle for pros, we had to change the building blocks, not just the flow.</p>
   </div>
 
+  <div class="cs-chapter-heading">
+    <span class="cs-chapter-num">03</span>
+    <h3>The design system</h3>
+    <p class="cs-chapter-sub">A new component layer built for pro users</p>
+  </div>
+
   <!-- 3. Highlighted: building a mobile design system for pro users -->
   <div class="cs-cursor-chapter">
-    <div class="block-label">3 · The real fix</div>
+    <div class="block-label">The real fix</div>
     <h3>Building a mobile design system for pro users</h3>
     <p>Workday already had two component libraries I could stand on: a mature <em>web component library</em> and an <em>older mobile kit</em> built around casual, consumer-style phone use. I used both as a starting point—same colors, same rules, same accessibility baseline—and designed a new pro-user layer on top: tighter action bars, compact item rows, inline form fields, a first-class <em>scanner input</em>, and a multi-value container so one screen can hold a whole batch. Denser, but still familiar.</p>
     <p>The preview below is that library running live. Tap <strong>Pattern library</strong> to browse every component I built, or jump into a real task to see them composed together. It’s the same React code that ships—not a deck.</p>
@@ -124,15 +176,11 @@
       <div>
         <div class="block-label">Try it yourself</div>
         <h4>Live preview — the pro-user mobile library</h4>
-        <p class="cs-live-demo-hint">Real components, real React. Start with <strong>Pattern library</strong> to see the building blocks, then drop into a task to see them in action.</p>
+        <p class="cs-live-demo-hint">Real components, real React. Browse the <strong>Pattern library</strong>, then see the same components in a live task with <strong>Find balance</strong>.</p>
       </div>
       <div class="cs-live-demo-jump" role="tablist" aria-label="Jump to screen">
         <button type="button" class="cs-jump-btn is-active" data-hub-route="/design-system">Pattern library</button>
         <button type="button" class="cs-jump-btn" data-hub-route="/find-inventory-balance">Find balance</button>
-        <button type="button" class="cs-jump-btn" data-hub-route="/adjust-inventory">Adjust</button>
-        <button type="button" class="cs-jump-btn" data-hub-route="/ad-hoc-par-count">Par count</button>
-        <button type="button" class="cs-jump-btn" data-hub-route="/assign-label-printer">Printer</button>
-        <button type="button" class="cs-jump-btn" data-hub-route="/">Roadmap (21 tasks)</button>
       </div>
     </div>
     <div class="cs-phone-frame">
@@ -145,13 +193,19 @@
       ></iframe>
     </div>
     <p class="cs-live-demo-foot">
-      A few components worth poking at: <em>action bar</em> (scanner + primary), <em>form fields</em> (auto-advancing quantity), <em>multi-value container</em>, and <em>item list</em>. Prefer full screen? <a href="hub/index.html#/design-system" target="_blank" rel="noopener">Open the app in a new tab ↗</a>
+      Components worth exploring: <em>action bar</em> (scanner + primary CTA), <em>form fields</em> (auto-advancing quantity), <em>multi-value container</em>, and <em>item list</em>. <a href="hub/index.html#/design-system" target="_blank" rel="noopener">Open full screen ↗</a>
     </p>
+  </div>
+
+  <div class="cs-chapter-heading">
+    <span class="cs-chapter-num">04</span>
+    <h3>The final design</h3>
+    <p class="cs-chapter-sub">Batch pick with the new library — denser, scanner-led, webview-ready</p>
   </div>
 
   <!-- 4. Final design: batch pick -->
   <div class="block">
-    <div class="block-label">4 · The final design</div>
+    <div class="block-label">The final design</div>
     <h3>Batch pick with the new library — denser, scanner-led</h3>
     <p>With the pro-user components in place, batch pick holds many more lines in one thumb’s reach without feeling cramped. On top of that, I added two task-specific touches: the <em>barcode scanner drives the next step</em> on its own, and required fields <em>auto-advance</em>—type quantity, move to the tote field, scan, move on—so your thumb never hunts for the next box. This runs in a webview, so engineering could ship it without a full native rebuild.</p>
   </div>
@@ -175,6 +229,21 @@
     </figure>
   </div>
 
+  <div class="cs-chapter-heading">
+    <span class="cs-chapter-num">05</span>
+    <h3>Designer in the stack</h3>
+    <p class="cs-chapter-sub">Extending the design system and shipping it</p>
+  </div>
+
+  <!-- 5. Scaling with Cursor -->
+  <div class="block">
+    <div class="block-label">Designer in the stack</div>
+    <h3>Extending the design system — and shipping it</h3>
+    <p>Workday's design system was built for web and native mobile. Mobile webviews — where these inventory tasks run — had no formal component layer. Working directly with engineering, I filled that gap: denser proportions, scanner-aware patterns, and a component registry both designers and engineers could reference.</p>
+    <p>I was among the first designers at Workday to push components into production. Using <em>Cursor</em> for frontend iteration, <em>Lovable</em> for rapid prototyping, and <em>Figma MCP</em> to keep design tokens in sync with the Workday design system, I compressed the handoff into a workflow I owned end-to-end. That practical fluency let me make faster, higher-fidelity decisions with engineering — and cut the back-and-forth that typically slows mobile webview work.</p>
+    <p>The library didn't stay in one team. Other groups building mobile webview experiences picked it up as a foundation — turning a task-specific component set into a reusable extension of the core system, and reducing the time other teams spent re-solving the same density and interaction problems from scratch.</p>
+  </div>
+
   <!-- Outcomes -->
   <div class="block">
     <div class="block-label">Outcomes at Workday</div>
@@ -182,16 +251,9 @@
     <ul class="checklist">
       <li>Pro-user mobile component library shipped — built on Workday's web and mobile base, same tokens, denser proportions for shift-long use</li>
       <li>Batch pick redesigned with scanner-driven control and auto-advancing fields — measurably fewer taps per pick cycle</li>
-      <li>Library extended across 21 inventory tasks using Cursor — one source of truth for both engineering and design</li>
-      <li>Reusable pattern available to other Workday mobile teams without re-solving density from scratch</li>
+      <li>Library extended to 21 inventory tasks — one source of truth shared with engineering, adopted by other mobile webview teams</li>
+      <li>First designer at Workday to push components to production using Cursor, Lovable, and Figma MCP — collapsing design-to-code handoff into a single workflow</li>
     </ul>
-  </div>
-
-  <!-- 5. Scaling with Cursor -->
-  <div class="block">
-    <div class="block-label">5 · Scaling the library</div>
-    <h3>Stretching the same components across 21 inventory tasks with Cursor</h3>
-    <p>A design system is only real if it holds up under load. I used <em>Cursor</em> (an AI coding assistant) to wire these same components into <strong>21 inventory tasks</strong>—count, receive, put-away, par count, label printer, find balance, and more—in the live app above. Cursor sped up the scaffolding, refactors, and docs; I still owned naming, layout rules, and review. The Pattern library tab you just tapped through is the same registry engineers use. One source of truth.</p>
   </div>
 
   <!-- Takeaways -->
@@ -218,8 +280,8 @@
     </div>
     <div class="kh-card">
       <div class="kh-number">04</div>
-      <h4>Use Cursor to scale, not to skip thinking</h4>
-      <p>Cursor helped me extend the library across 21 inventory tasks quickly. Naming, layout rules, and review still belong to the designer.</p>
+      <h4>Tools that close the design–engineering gap</h4>
+      <p>Cursor, Lovable, and Figma MCP let me own both the spec and the implementation. Faster decisions, fewer handoff gaps, and a library engineering actually trusts.</p>
     </div>
   </div>
 
@@ -307,7 +369,7 @@
       }),
       { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
     );
-    document.querySelectorAll('.block, .callout, .quote-block, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery, .cs-overview, .cs-cursor-chapter, .cs-live-demo, .cs-chapter-heading').forEach(el => {
+    document.querySelectorAll('.block, .callout, .quote-block, .comparison-grid, .insight-list, .reflection-block, .solution-table, .focus-grid, .checklist, .cs-meta-strip, .my-role-block, .kh-grid, .more-story, .cs-gallery, .cs-overview, .cs-cursor-chapter, .cs-live-demo, .cs-chapter-heading, .cs-snapshot').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(16px)';
       el.style.transition = `opacity 0.72s ${ease}, transform 0.72s ${ease}`;

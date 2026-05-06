@@ -2410,7 +2410,7 @@ nav.nav--past-header .nav-back {
   aspect-ratio: 9 / 19.5;
   background: #111;
   border-radius: 40px;
-  padding: 12px;
+  padding: 46px 12px 12px;
   box-shadow: 0 20px 50px -20px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.06);
   position: relative;
 }
@@ -2452,7 +2452,7 @@ nav.nav--past-header .nav-back {
   .cs-phone-frame {
     width: min(100%, 340px);
     border-radius: 32px;
-    padding: 10px;
+    padding: 40px 10px 10px;
   }
   .cs-phone-frame iframe { border-radius: 22px; }
   .cs-phone-frame::before { top: 14px; width: 70px; height: 18px; }
@@ -2906,6 +2906,17 @@ footer a.footer-cta--secondary:hover img { opacity: 1; }
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 28px;
+}
+.cs-snapshot-gallery .cs-figure {
+  overflow: hidden;
+  border-radius: 6px;
+}
+.cs-snapshot-gallery .cs-figure img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center top;
 }
 .cs-snapshot-cta {
   display: flex;
