@@ -2376,7 +2376,8 @@ nav.nav--past-header .nav-back {
   justify-content: center;
   justify-self: stretch;
 }
-.cs-collab-tile > img.cs-collab-brand:first-child {
+.cs-collab-tile > img.cs-collab-brand:first-child,
+.cs-collab-tile > svg.cs-collab-brand:first-child {
   display: block;
   width: 40px;
   height: 40px;
@@ -2384,11 +2385,17 @@ nav.nav--past-header .nav-back {
   max-height: 40px;
   object-fit: contain;
   place-self: center;
+  box-sizing: border-box;
 }
 .cs-collab-brand {
   width: 40px;
   height: 40px;
   object-fit: contain;
+  flex-shrink: 0;
+  color: var(--ink);
+}
+svg.cs-collab-brand {
+  display: block;
   flex-shrink: 0;
 }
 .cs-collab-tile-top {
@@ -2463,6 +2470,11 @@ nav.nav--past-header .nav-back {
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  display: block;
+}
+svg.cs-collab-ds-icon {
+  overflow: visible;
 }
 @media (max-width: 640px) {
   .cs-collab-strip {
