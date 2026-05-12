@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="analytics.js"></script>
-  <script src="auth.js"></script>
+  <script src="auth.js?v=20260211"></script>
 </head>
 <body>
 
@@ -651,10 +651,27 @@
       <span class="more-story-lead">There's more to the story...</span>
       <span>Extra artifacts (flows, eval notes, wireframes) available on request.</span>
     </div>
-    <div class="more-story-badge">Request full case study →</div>
+    <div class="more-story-actions">
+      <a href="mailto:Eric.chakho.wong@gmail.com?subject=Intake%20Agent%20%E2%80%94%20full%20case%20study" class="more-story-badge">Request full case study →</a>
+      <button type="button" class="more-story-badge more-story-badge--ghost" id="openPresentationBtn" aria-haspopup="dialog" aria-controls="presentationAuthDialog">Presentation mode →</button>
+    </div>
   </div>
 
 </section>
+
+  <dialog id="presentationAuthDialog" class="presentation-auth-dialog" aria-labelledby="presentationAuthTitle">
+    <h2 id="presentationAuthTitle" class="presentation-auth-title">Presentation mode</h2>
+    <p class="presentation-auth-desc">Password required to open the slide deck.</p>
+    <form id="presentationAuthForm" action="#" novalidate>
+      <label class="presentation-auth-label" for="presentationAuthInput">Password</label>
+      <input id="presentationAuthInput" class="presentation-auth-input" type="password" autocomplete="current-password" placeholder="Enter password" />
+      <p class="presentation-auth-err" id="presentationAuthErr" role="alert" hidden>Incorrect password — try again.</p>
+      <div class="presentation-auth-actions">
+        <button type="button" class="presentation-auth-cancel" id="presentationAuthCancel">Cancel</button>
+        <button type="submit" class="presentation-auth-submit">Open deck →</button>
+      </div>
+    </form>
+  </dialog>
 
 <!-- ─── FOOTER ─── -->
 <footer>
@@ -984,6 +1001,47 @@
       el.style.transform = 'translateY(16px)';
       el.style.transition = `opacity 0.72s ${ease}, transform 0.72s ${ease}`;
       observer.observe(el);
+    });
+  })();
+
+  // Presentation mode → intake-agent-deck.html (password: go)
+  (function () {
+    var KEY = 'intake_agent_presentation';
+    var PASS = 'go';
+    var btn = document.getElementById('openPresentationBtn');
+    var dlg = document.getElementById('presentationAuthDialog');
+    if (!btn || !dlg) return;
+    var input = document.getElementById('presentationAuthInput');
+    var err = document.getElementById('presentationAuthErr');
+    var form = document.getElementById('presentationAuthForm');
+    var cancel = document.getElementById('presentationAuthCancel');
+
+    btn.addEventListener('click', function () {
+      err.hidden = true;
+      if (input) input.value = '';
+      dlg.showModal();
+      setTimeout(function () { if (input) input.focus(); }, 60);
+    });
+
+    cancel.addEventListener('click', function () { dlg.close(); });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = (input && input.value.trim()) || '';
+      if (v.toLowerCase() === PASS) {
+        try { localStorage.setItem(KEY, '1'); } catch (e) {}
+        try { sessionStorage.setItem(KEY, '1'); } catch (e2) {}
+        dlg.close();
+        var deckUrl = 'intake-agent-deck.html';
+        var w = window.open(deckUrl, '_blank', 'noopener,noreferrer');
+        if (!w) window.location.href = deckUrl;
+        return;
+      }
+      err.hidden = false;
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
     });
   })();
 </script>

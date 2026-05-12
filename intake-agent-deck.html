@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intake Agent — Autodesk Panel Deck (Eric Huang)</title>
+  <link rel="icon" type="image/png" href="images/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="images/favicon-apple.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet" />
+  <style id="deck-styles">
+    :root {
+      --bg: #F4F2EE;
+      --bg-card: #FFFFFF;
+      --ink: #18181B;
+      --ink-2: #3F3F46;
+      --ink-secondary: #52525B;
+      --ink-muted: #A1A1AA;
+      --accent: #1A56DB;
+      --accent-light: #EFF4FF;
+      --accent-green: #059669;
+      --rule: rgba(24,24,27,0.10);
+      --hairline: rgba(24,24,27,0.06);
+      --border: #E4E4E7;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.05);
+      --shadow-lg: 0 24px 48px rgba(0,0,0,.10), 0 8px 16px rgba(0,0,0,.05);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      letter-spacing: -0.005em;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* Screenshots: letterbox inside frame (PNG aspect ratios vary) */
+    .deck-shot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      width: 100%;
+      border-radius: 0.55cqi;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      background: #F4F4F5;
+      box-sizing: border-box;
+    }
+    .deck-shot img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      object-position: top center;
+      display: block;
+    }
+
+    .stage {
+      position: fixed; inset: 0;
+      display: grid; place-items: center;
+      padding: clamp(8px, 2vmin, 28px) clamp(8px, 2vmin, 32px) max(56px, calc(8px + 5vmin));
+    }
+    .deck {
+      width: min(100%, calc((100dvh - 100px) * 16 / 9));
+      max-width: 1440px;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      container-type: size;
+      container-name: slide;
+    }
+    .slide {
+      position: absolute; inset: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--hairline);
+      border-radius: clamp(8px, 1cqi, 18px);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      padding: 3.4cqi 4.6cqi 6.4cqi;
+      overflow: hidden;
+      min-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(0.6cqi);
+      transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1), transform 320ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 320ms;
+    }
+    .slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity 380ms cubic-bezier(0.22, 1, 0.36, 1), transform 380ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide { transition: none !important; transform: none !important; }
+    }
+
+    .s-eyebrow {
+      font-size: 1.2cqi;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 1.4cqi;
+    }
+    .s-eyebrow::before {
+      content: "";
+      width: 3.4cqi;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.6;
+    }
+    .s-eyebrow .kicker { color: var(--accent); font-weight: 700; }
+    .s-headline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 400;
+      font-size: 4.15cqi;
+      line-height: 1.08;
+      letter-spacing: -0.022em;
+      color: var(--ink);
+      max-width: 32ch;
+      flex-shrink: 0;
+    }
+    .s-headline em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .s-head {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 3cqi; margin-bottom: 1cqi; flex-shrink: 0;
+    }
+
+    .s-footer {
+      position: absolute;
+      left: 4.6cqi; right: 4.6cqi; bottom: 1.5cqi;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 1.25cqi; color: var(--ink-muted); font-weight: 500;
+      letter-spacing: 0.06em;
+      pointer-events: none;
+    }
+    .s-footer .left strong { color: var(--ink-secondary); font-weight: 600; }
+    .s-footer .right { font-variant-numeric: tabular-nums; letter-spacing: 0.12em; }
+    .slide--title .s-footer { display: none; }
+
+    /* Slide 1 — Title */
+    .slide--title { justify-content: space-between; padding: 4.8cqi 5.2cqi 5.2cqi; background:
+      radial-gradient(120% 80% at 100% 0%, rgba(26,86,219,0.06) 0%, transparent 55%),
+      radial-gradient(80% 60% at 0% 100%, rgba(5,150,105,0.04) 0%, transparent 55%),
+      var(--bg-card);
+    }
+    .s1-mark { font-size: 1.5cqi; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; display: flex; align-items: center; gap: 2.4cqi; }
+    .s1-mark .badge { display: inline-flex; align-items: center; gap: 0.9cqi; color: var(--ink-secondary); }
+    .s1-mark .dot { display: inline-block; width: 0.8cqi; height: 0.8cqi; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 0 0.25cqi rgba(5,150,105,0.18); }
+    .s1-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 12cqi;
+      line-height: 0.94;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+    .s1-title em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .s1-sub {
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 2.25cqi;
+      line-height: 1.28;
+      color: var(--ink-secondary);
+      max-width: 52ch;
+      margin-top: 1.2cqi;
+    }
+    .s1-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 4cqi;
+      font-size: 1.45cqi;
+      color: var(--ink-secondary);
+      font-weight: 500;
+    }
+    .s1-foot .name { color: var(--ink); font-weight: 700; font-size: 1.55cqi; letter-spacing: -0.005em; }
+    .s1-foot .meta { display: flex; gap: 2.6cqi; align-items: baseline; }
+    .s1-foot .meta span { color: var(--ink-secondary); }
+    .s1-tags { display: flex; gap: 0.8cqi; flex-wrap: wrap; }
+    .s1-tag {
+      font-size: 1.2cqi;
+      padding: 0.5cqi 1.2cqi;
+      border-radius: 100px;
+      background: transparent;
+      border: 1px solid var(--rule);
+      color: var(--ink-secondary);
+      font-weight: 500;
+      letter-spacing: -0.005em;
+    }
+    .s1-tag.is-accent { color: var(--accent); border-color: rgba(26,86,219,0.3); background: var(--accent-light); }
+
+    /* Slide 2 — Who I am */
+    .slide--who { padding: 4.6cqi 5.4cqi; gap: 2cqi; }
+    .s2-headline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 4cqi;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      max-width: 26ch;
+      font-weight: 400;
+    }
+    .s2-headline em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .s2-body { display: grid; grid-template-columns: 1fr 1fr; column-gap: 4cqi; row-gap: 1.2cqi; max-width: 100%; margin-top: 0.4cqi; flex: 1; min-height: 0; align-content: start; }
+    .slide--task .s2-body--task { grid-template-columns: 1fr; max-width: 95%; }
+    .s2-body--arc { grid-template-columns: 1fr; max-width: 100%; row-gap: 0.85cqi; }
+    .s-overview {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2cqi;
+      margin-top: 0.8cqi;
+      flex: 1;
+      min-height: 0;
+      align-content: start;
+    }
+    .s-overview-card {
+      padding: 1.35cqi 1.45cqi;
+      border-radius: 0.75cqi;
+      border: 1px solid var(--rule);
+      background: #FAFAFA;
+      min-height: 0;
+    }
+    .s-overview-card .star {
+      font-size: 1cqi;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.5cqi;
+    }
+    .s-overview-card h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5cqi;
+      font-weight: 400;
+      margin-bottom: 0.65cqi;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+    .s-overview-card p { font-size: 1.12cqi; line-height: 1.38; color: var(--ink-secondary); }
+    .eu-action-stack { display: flex; flex-direction: column; gap: 0.85cqi; flex: 1; min-height: 0; overflow: hidden; }
+    .eu-action-stack .s4-shipped { flex-shrink: 0; }
+    .eu-action-stack .s4-shipped .deck-shot { max-height: 13cqi; min-height: 8cqi; }
+    .eu-action-stack .s6-flow { max-height: 31cqi; flex: 1; min-height: 0; }
+    .admin-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 1cqi; margin-top: 0.6cqi; flex: 1; min-height: 0; max-height: 26cqi; }
+    .admin-shots .deck-shot { max-height: 100%; min-height: 0; }
+    .s2-body p {
+      font-size: 1.45cqi;
+      line-height: 1.42;
+      color: var(--ink-secondary);
+      max-width: none;
+    }
+    .s2-body p strong { color: var(--ink); font-weight: 600; }
+
+    /* Slide 3 — Problem + Research */
+    .slide--problem { gap: 1.2cqi; flex: 1; min-height: 0; }
+    .s3-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3.2cqi; flex: 1; min-height: 0; align-items: start; padding-top: 0.4cqi; overflow: hidden; }
+    .s3-left { display: flex; flex-direction: column; gap: 1.4cqi; }
+    .s3-left .label { font-size: 1.2cqi; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); font-weight: 700; margin-bottom: 0.4cqi; }
+    .s3-left p { font-size: 1.38cqi; line-height: 1.4; color: var(--ink-secondary); }
+    .s3-left p strong { color: var(--ink); font-weight: 600; }
+    .s3-table { width: 100%; border-collapse: collapse; font-size: 1.28cqi; }
+    .s3-table thead th {
+      text-align: left;
+      font-size: 1.15cqi;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      font-weight: 700;
+      padding: 0 0 1.2cqi;
+      border-bottom: 1px solid var(--rule);
+    }
+    .s3-table thead th:last-child { padding-left: 1.4cqi; }
+    .s3-table td {
+      padding: 0.65cqi 0.9cqi 0.65cqi 0;
+      border-bottom: 1px solid var(--hairline);
+      vertical-align: top;
+      line-height: 1.45;
+    }
+    .s3-table td:first-child { color: var(--ink); font-weight: 500; padding-right: 1.4cqi; }
+    .s3-table td:last-child { color: var(--ink-secondary); padding-left: 1.4cqi; border-left: 1px solid var(--hairline); }
+    .s3-table tr:last-child td { border-bottom: 0; }
+    .s3-insight {
+      margin-top: 0.2cqi;
+      padding: 1.2cqi 1.6cqi;
+      border-radius: 0.8cqi;
+      background: var(--accent-light);
+      display: flex;
+      align-items: baseline;
+      gap: 2cqi;
+    }
+    .s3-insight .label { font-size: 1.2cqi; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .s3-insight .quote { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.85cqi; line-height: 1.25; color: var(--ink); }
+
+    /* Slide 4 — Explored & Rejected */
+    .slide--rejected { gap: 1.1cqi; flex: 1; min-height: 0; }
+    .s4-options { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6cqi; flex-shrink: 0; }
+    .s4-card {
+      padding: 1.4cqi 1.6cqi;
+      border: 1px solid var(--rule);
+      border-radius: 0.8cqi;
+      background: #FAFAFA;
+    }
+    .s4-card .tag {
+      display: inline-block;
+      font-size: 1.1cqi;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #B91C1C;
+      background: #FEF2F2;
+      padding: 0.4cqi 1.1cqi;
+      border-radius: 100px;
+      font-weight: 700;
+      margin-bottom: 1.2cqi;
+    }
+    .s4-card h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.2cqi;
+      line-height: 1.1;
+      font-weight: 400;
+      margin-bottom: 1.2cqi;
+      color: var(--ink);
+      text-decoration: line-through;
+      text-decoration-color: var(--ink-muted);
+      text-decoration-thickness: 0.18cqi;
+    }
+    .s4-card ul { list-style: none; padding: 0; }
+    .s4-card li {
+      font-size: 1.25cqi;
+      line-height: 1.38;
+      color: var(--ink-secondary);
+      padding-left: 1.6cqi;
+      position: relative;
+      margin-bottom: 0.6cqi;
+    }
+    .s4-card li::before { content: ""; position: absolute; left: 0; top: 1cqi; width: 0.7cqi; height: 1px; background: var(--ink-muted); }
+    .s4-tradeoff {
+      padding: 1.1cqi 1.5cqi;
+      background: var(--ink);
+      color: #FAFAFA;
+      border-radius: 0.8cqi;
+      display: flex; align-items: baseline; gap: 1.6cqi;
+    }
+    .s4-tradeoff .label { color: #fff; font-style: normal; font-weight: 700; font-family: 'Inter', sans-serif; font-size: 1.15cqi; letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; opacity: 0.65; }
+    .s4-tradeoff .body {
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-size: 1.55cqi;
+      line-height: 1.35;
+      font-weight: 300;
+      color: #FAFAFA;
+    }
+    .s4-shipped {
+      display: grid; grid-template-columns: 1fr 1.35fr; gap: 1.6cqi;
+      align-items: center;
+      padding: 1.2cqi 1.5cqi;
+      border-radius: 0.8cqi;
+      background: #fff;
+      border: 1px solid var(--rule);
+    }
+    .s4-shipped p { font-size: 1.25cqi; line-height: 1.38; color: var(--ink-secondary); }
+    .s4-shipped p strong { color: var(--ink); font-weight: 500; display: block; font-size: 1.45cqi; margin-bottom: 0.25cqi; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400; }
+    .s4-shipped .deck-shot {
+      max-height: 22cqi;
+      min-height: 10cqi;
+      align-self: center;
+    }
+
+    /* Slide 5 — System */
+    .slide--system { gap: 1.2cqi; flex: 1; min-height: 0; }
+    .s5-loop {
+      padding: 1.4cqi 1.5cqi;
+      border-radius: 0.8cqi;
+      background: linear-gradient(180deg, #FAFAFA 0%, #F4F4F5 100%);
+      border: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 1.6cqi;
+      align-items: center;
+    }
+    .s5-node { padding: 1.4cqi 1.6cqi; background: #fff; border: 1px solid var(--rule); border-radius: 0.6cqi; display: flex; flex-direction: column; gap: 0.5cqi; min-width: 0; }
+    .s5-node .who { font-size: 1.05cqi; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--ink-muted); }
+    .s5-node .what { font-size: 1.2cqi; line-height: 1.28; color: var(--ink); font-weight: 500; }
+    .s5-node--admin .who { color: var(--accent); }
+    .s5-node--user .who { color: var(--accent-green); }
+    .s5-arrow { color: var(--ink-muted); font-size: 2.4cqi; line-height: 1; font-weight: 300; }
+    .s5-grid { display: grid; grid-template-columns: 0.95fr 1.35fr; gap: 2.6cqi; flex: 1; min-height: 0; align-items: start; overflow: hidden; }
+    .s5-table { width: 100%; border-collapse: collapse; font-size: 1.22cqi; }
+    .s5-table thead th { text-align: left; font-size: 1.1cqi; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); font-weight: 700; padding-bottom: 1cqi; border-bottom: 1px solid var(--rule); }
+    .s5-table thead th:last-child { padding-left: 1.4cqi; }
+    .s5-table td { padding: 0.55cqi 0.9cqi 0.55cqi 0; border-bottom: 1px solid var(--hairline); vertical-align: top; line-height: 1.32; }
+    .s5-table td:first-child { color: var(--ink); font-weight: 500; }
+    .s5-table td:last-child { color: var(--ink-secondary); padding-left: 1.4cqi; border-left: 1px solid var(--hairline); }
+    .s5-table tr:last-child td { border-bottom: 0; }
+    .s5-quote { padding-top: 0.4cqi; }
+    .s5-quote .label { font-size: 1.1cqi; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 1.2cqi; }
+    .s5-quote .text { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 1.65cqi; line-height: 1.28; color: var(--ink); font-weight: 400; max-width: 24ch; }
+    .s5-quote .attrib { font-size: 1.1cqi; color: var(--ink-muted); margin-top: 0.6cqi; }
+
+    /* Slide 6 — Phase 1 */
+    .slide--phase1 { gap: 1.2cqi; flex: 1; min-height: 0; }
+    .s6-flow { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.4cqi; flex: 1; min-height: 0; max-height: 44cqi; align-content: stretch; overflow: hidden; }
+    .s6-frame { display: flex; flex-direction: column; gap: 0.55cqi; min-height: 0; }
+    .s6-shot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 0;
+      min-height: 0;
+      width: 100%;
+      max-height: 34cqi;
+      border-radius: 0.5cqi;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      box-shadow: var(--shadow-md);
+      background: #F4F4F5;
+    }
+    .s6-shot img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      object-position: top center;
+    }
+    .s6-cap { display: flex; flex-direction: column; gap: 0.4cqi; }
+    .s6-cap .step { font-size: 1.1cqi; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
+    .s6-cap .label { font-size: 1.15cqi; line-height: 1.28; color: var(--ink); font-weight: 500; max-width: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .s6-promise { font-size: 1.2cqi; line-height: 1.35; color: var(--ink-secondary); max-width: 100%; flex-shrink: 0; }
+    .s6-promise strong { color: var(--ink); font-weight: 600; }
+
+    /* Slide 7 — Reply pattern + Phase 2 */
+    .slide--craft { gap: 1cqi; flex: 1; min-height: 0; }
+    .s7-grid { display: grid; grid-template-columns: 0.95fr 1.35fr; gap: 2.2cqi; flex: 1; min-height: 0; align-items: stretch; overflow: hidden; }
+    .s7-pattern { padding: 1.2cqi 1.35cqi; border: 1px dashed var(--rule); border-radius: 0.65cqi; background: #FAFAFA; min-height: 0; }
+    .s7-pattern .label { font-size: 1.1cqi; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--ink-muted); margin-bottom: 1.2cqi; }
+    .s7-row { padding: 1.1cqi 1.4cqi; background: #fff; border: 1px solid var(--rule); border-radius: 0.5cqi; font-size: 1.45cqi; color: var(--ink); margin-bottom: 0.7cqi; line-height: 1.4; }
+    .s7-action { padding: 1cqi 1.4cqi; background: var(--accent); color: #fff; border-radius: 0.5cqi; font-size: 1.4cqi; font-weight: 600; display: inline-block; margin-top: 0.2cqi; }
+    .s7-phase2 { display: flex; flex-direction: column; min-height: 0; flex: 1; overflow: hidden; }
+    .s7-phase2 h4 { font-family: 'Fraunces', Georgia, serif; font-size: 1.65cqi; line-height: 1.15; font-weight: 400; margin-bottom: 0.55cqi; color: var(--ink); }
+    .s7-phase2 h4 em { font-style: italic; color: var(--accent); }
+    .s7-phase2 ul { list-style: none; }
+    .s7-phase2 li { font-size: 1.2cqi; line-height: 1.32; color: var(--ink-secondary); margin-bottom: 0.25cqi; padding-left: 1.35cqi; position: relative; }
+    .s7-phase2 li::before { content: "→"; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 600; }
+    .s7-phase2 li strong { color: var(--ink); font-weight: 600; }
+    .s7-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85cqi; margin-top: 0.6cqi; flex: 1; min-height: 0; max-height: 34cqi; }
+    .s7-shots .s6-shot { max-height: 100%; min-height: 8cqi; flex: 1 1 0; }
+    .s7-source { font-size: 1.05cqi; padding: 0.6cqi 0 0; border-top: 1px solid var(--rule); color: var(--ink-secondary); margin-top: 0.4cqi; line-height: 1.32; max-width: none; }
+    .s7-source strong { color: var(--ink); font-weight: 500; font-family: 'Fraunces', Georgia, serif; font-style: italic; }
+
+    /* Slide 8 — Stakeholder */
+    .slide--influence { gap: 1.2cqi; flex: 1; min-height: 0; }
+    .s8-table { width: 100%; border-collapse: collapse; font-size: 1.18cqi; flex: 1; min-height: 0; }
+    .s8-table thead th { text-align: left; font-size: 1.1cqi; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); font-weight: 700; padding-bottom: 1.2cqi; border-bottom: 1px solid var(--rule); vertical-align: bottom; }
+    .s8-table thead th:first-child { width: 28%; }
+    .s8-table thead th:nth-child(2) { width: 38%; }
+    .s8-table thead th:nth-child(3) { width: 34%; }
+    .s8-table td { padding: 0.55cqi 0.85cqi 0.55cqi 0; border-bottom: 1px solid var(--hairline); vertical-align: top; line-height: 1.3; }
+    .s8-table td:first-child { color: var(--ink); font-weight: 500; padding-right: 1cqi; font-family: 'Fraunces', Georgia, serif; font-size: 1.28cqi; line-height: 1.2; }
+    .s8-table td.push { color: var(--ink-secondary); padding-right: 2cqi; }
+    .s8-table td.result { color: var(--ink); font-weight: 600; font-size: 1.45cqi; }
+    .s8-table td.result::before { content: "✓"; color: var(--accent-green); margin-right: 0.6cqi; font-weight: 700; }
+    .s8-table tr:last-child td { border-bottom: 0; }
+
+    /* Slide 9 — Outcomes */
+    .slide--outcomes { gap: 1.2cqi; flex: 1; min-height: 0; }
+    .s9-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6cqi; flex: 1; min-height: 0; align-items: start; overflow: hidden; }
+    .s9-col h4 { font-size: 1.05cqi; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); font-weight: 700; margin-bottom: 0.65cqi; }
+    .s9-list { list-style: none; }
+    .s9-list li { font-size: 1.22cqi; line-height: 1.32; color: var(--ink); padding: 0.55cqi 0 0.55cqi 2.1cqi; position: relative; border-bottom: 1px solid var(--hairline); font-weight: 400; }
+    .s9-list li:last-child { border-bottom: 0; }
+    .s9-list li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 1.15cqi;
+      width: 1.4cqi; height: 1.4cqi;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: inset 0 0 0 0.3cqi #fff, 0 0 0 1px var(--accent-green);
+    }
+    .s9-impact { font-size: 1.22cqi; line-height: 1.35; color: var(--ink-secondary); margin-bottom: 0.45cqi; }
+    .s9-impact strong { color: var(--ink); font-weight: 600; }
+    .s9-callout {
+      margin-top: 0.6cqi;
+      padding: 1.1cqi 1.4cqi;
+      background: var(--ink);
+      color: #FAFAFA;
+      border-radius: 0.8cqi;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.45cqi;
+      line-height: 1.35;
+      font-weight: 300;
+      font-style: italic;
+    }
+    .s9-callout strong { color: #fff; font-weight: 500; font-style: normal; font-family: 'Inter', sans-serif; font-size: 1.1cqi; letter-spacing: 0.16em; text-transform: uppercase; display: block; margin-bottom: 0.6cqi; opacity: 0.65; }
+
+    /* Slide 10 — Reflection + Why Autodesk */
+    .slide--close { gap: 1.2cqi; padding: 3.6cqi 4.6cqi 6.4cqi; flex: 1; min-height: 0; }
+    .s10-quote {
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 3.15cqi;
+      line-height: 1.12;
+      letter-spacing: -0.018em;
+      color: var(--ink);
+      max-width: 32ch;
+      flex-shrink: 0;
+    }
+    .s10-quote::before { content: "\201C"; color: var(--accent); font-size: 1em; line-height: 0; vertical-align: -0.1em; margin-right: 0.05em; }
+    .s10-quote::after { content: "\201D"; color: var(--accent); font-size: 1em; line-height: 0; vertical-align: -0.1em; }
+    .s10-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 2.4cqi; margin-top: 0.2cqi; flex: 1; min-height: 0; align-items: start; overflow: hidden; }
+    .s10-col h4 { font-size: 1.05cqi; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); font-weight: 700; margin-bottom: 0.75cqi; }
+    .s10-col ul { list-style: none; }
+    .s10-col li { font-size: 1.2cqi; line-height: 1.32; color: var(--ink-secondary); margin-bottom: 0.45cqi; padding-left: 1.35cqi; position: relative; }
+    .s10-col li::before { content: "-"; position: absolute; left: 0; top: 0; color: var(--ink-muted); font-weight: 400; }
+    .s10-col li strong { color: var(--ink); font-weight: 600; }
+    .s10-table { width: 100%; border-collapse: collapse; font-size: 1.12cqi; }
+    .s10-table td { padding: 0.45cqi 0.85cqi 0.45cqi 0; border-bottom: 1px solid var(--hairline); vertical-align: top; line-height: 1.3; }
+    .s10-table td:first-child { color: var(--ink-secondary); padding-right: 1.4cqi; }
+    .s10-table td:last-child { color: var(--ink); font-weight: 500; padding-left: 1.4cqi; border-left: 1px solid var(--hairline); }
+    .s10-table tr:last-child td { border-bottom: 0; }
+    .s10-close--result {
+      margin-top: 0.5cqi;
+      padding-top: 0.8cqi;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
+    .s10-close--result .sig--block {
+      font-size: 1.15cqi;
+      color: var(--ink-muted);
+      line-height: 1.45;
+      text-align: right;
+    }
+    .s10-close--result .sig--block strong { color: var(--ink-secondary); display: block; margin-bottom: 0.2cqi; }
+    .s10-close {
+      margin-top: 0.35cqi;
+      padding-top: 1cqi;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 3cqi;
+    }
+    .s10-close .why { font-size: 1.2cqi; color: var(--ink-secondary); line-height: 1.35; max-width: 50ch; }
+    .s10-close .why strong { color: var(--ink); font-weight: 400; display: block; font-size: 1.35cqi; margin-bottom: 0.25cqi; font-family: 'Fraunces', Georgia, serif; font-style: italic; }
+    .s10-close .sig { font-size: 1.1cqi; color: var(--ink-muted); text-align: right; flex-shrink: 0; line-height: 1.45; }
+    .s10-close .sig strong { color: var(--ink-secondary); font-weight: 600; display: block; }
+
+    /* === Deck chrome === */
+    .deck-chrome {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      pointer-events: none;
+      z-index: 50;
+    }
+    .deck-chrome .grp { display: flex; align-items: center; gap: 8px; pointer-events: auto; }
+    .deck-btn {
+      appearance: none;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--rule);
+      color: var(--ink-secondary);
+      width: 36px; height: 36px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: color 200ms ease, background 200ms ease, transform 200ms ease, border-color 200ms ease;
+      font-family: inherit;
+    }
+    .deck-btn:hover { color: var(--accent); background: #fff; border-color: rgba(26,86,219,0.2); }
+    .deck-btn:active { transform: translateY(1px); }
+    .deck-btn[disabled] { opacity: 0.35; cursor: default; }
+    .deck-btn[disabled]:hover { color: var(--ink-secondary); background: rgba(255,255,255,0.92); border-color: var(--rule); }
+    .deck-btn.is-icon { width: auto; padding: 0 14px; gap: 8px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; height: 36px; }
+    .deck-counter {
+      font-variant-numeric: tabular-nums;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: var(--ink-secondary);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0 14px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 100px;
+      border: 1px solid var(--rule);
+      font-weight: 700;
+      pointer-events: auto;
+    }
+    .deck-progress {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: transparent;
+      z-index: 51;
+    }
+    .deck-progress-bar {
+      height: 100%;
+      background: var(--accent);
+      width: 10%;
+      transition: width 380ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* === Speaker notes overlay === */
+    .notes-overlay {
+      position: fixed; inset: 0;
+      background: rgba(24,24,27,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100;
+      display: grid; place-items: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 220ms ease, visibility 0s linear 220ms;
+    }
+    .notes-overlay.is-open { opacity: 1; visibility: visible; transition: opacity 220ms ease, visibility 0s; }
+    .notes-overlay[hidden] { display: none; }
+    .notes-card {
+      max-width: 720px;
+      width: 100%;
+      background: #18181B;
+      color: #FAFAFA;
+      padding: 32px 36px 28px;
+      border-radius: 16px;
+      box-shadow: 0 32px 60px rgba(0,0,0,0.4);
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .notes-card .label {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(239,244,255,0.85); font-weight: 700;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 18px;
+    }
+    .notes-card .label .num { font-variant-numeric: tabular-nums; color: rgba(250,250,250,0.45); font-weight: 600; }
+    .notes-card h4 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 22px; font-weight: 400; letter-spacing: -0.01em;
+      margin-bottom: 14px;
+      line-height: 1.2;
+      color: #fff;
+    }
+    .notes-card p {
+      font-size: 14.5px; line-height: 1.6;
+      color: rgba(250,250,250,0.86);
+      margin-bottom: 12px;
+    }
+    .notes-card p:last-child { margin-bottom: 0; }
+    .notes-card p strong { color: #fff; font-weight: 600; }
+    .notes-card p em { font-style: italic; color: rgba(250,250,250,0.65); }
+    .notes-hint {
+      position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+      font-size: 11px; letter-spacing: 0.12em; color: rgba(250,250,250,0.6);
+      text-transform: uppercase; font-weight: 600;
+    }
+    .notes-hint kbd {
+      background: rgba(255,255,255,0.12); padding: 3px 8px; border-radius: 4px;
+      font-family: inherit; margin: 0 2px;
+    }
+
+    /* === First-load hint === */
+    .deck-hint {
+      position: fixed; left: 50%; top: 16px; transform: translateX(-50%);
+      background: rgba(24,24,27,0.92);
+      color: #FAFAFA;
+      padding: 9px 18px;
+      border-radius: 100px;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+      z-index: 60;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .deck-hint.is-visible { opacity: 1; }
+    .deck-hint kbd {
+      background: rgba(255,255,255,0.14);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: inherit;
+      margin: 0 2px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Presentation gate (password from case study: go) */
+    html.deck-authed #deckGate { display: none !important; }
+    .deck-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .deck-gate-card {
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      padding: 28px 24px 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow-lg);
+    }
+    .deck-gate-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 10px;
+    }
+    .deck-gate-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+    .deck-gate-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ink-secondary);
+      margin: 0 0 20px;
+    }
+    .deck-gate-form { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+    .deck-gate-input {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+    }
+    .deck-gate-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+    }
+    .deck-gate-err {
+      font-size: 13px;
+      color: #B91C1C;
+      margin: 0;
+      text-align: left;
+    }
+    .deck-gate-submit {
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+    }
+    .deck-gate-submit:hover { opacity: 0.92; }
+    .deck-gate-back {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .deck-gate-back:hover { text-decoration: underline; }
+    .deck-gate-sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* === Print: PDF export (1280x720 each) === */
+    @media print {
+      @page { size: 1280px 720px; margin: 0; }
+      html, body { background: #fff; overflow: visible; height: auto; }
+      .stage { position: static; padding: 0; display: block; }
+      .deck { width: 1280px; height: 720px; max-width: none; aspect-ratio: auto; }
+      .deck-chrome, .deck-progress, .deck-hint, .notes-overlay, #deckGate { display: none !important; }
+      .slide {
+        position: relative;
+        opacity: 1 !important; visibility: visible !important; transform: none !important;
+        width: 1280px; height: 720px;
+        page-break-after: always;
+        box-shadow: none;
+        border: 0;
+        border-radius: 0;
+        break-inside: avoid;
+      }
+    }
+  </style>
+  <script>
+    (function () {
+      if (localStorage.getItem('intake_agent_presentation') === '1' || sessionStorage.getItem('intake_agent_presentation') === '1') {
+        document.documentElement.classList.add('deck-authed');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div id="deckGate" class="deck-gate" role="dialog" aria-modal="true" aria-labelledby="deckGateTitle">
+    <div class="deck-gate-card">
+      <p class="deck-gate-eyebrow">Intake Agent</p>
+      <h2 id="deckGateTitle" class="deck-gate-title">Presentation mode</h2>
+      <p class="deck-gate-desc">Enter the password from the case study to open this deck.</p>
+      <form id="deckGateForm" class="deck-gate-form" action="#">
+        <label class="deck-gate-sr" for="deckGateInput">Password</label>
+        <input id="deckGateInput" class="deck-gate-input" type="password" autocomplete="current-password" placeholder="Password" />
+        <p id="deckGateErr" class="deck-gate-err" role="alert" hidden>Incorrect password — try again.</p>
+        <button type="submit" class="deck-gate-submit">Continue</button>
+      </form>
+      <a href="intake-agent.html" class="deck-gate-back">← Back to case study</a>
+    </div>
+  </div>
+
+  <div class="deck-progress" aria-hidden="true"><div class="deck-progress-bar" id="progressBar"></div></div>
+
+  <div class="stage">
+    <main class="deck" id="deck">
+
+      <!-- ====== SLIDE 1 — TITLE ====== -->
+      <section class="slide slide--title is-active" data-slide="1" aria-label="Title">
+        <div class="s1-mark">
+          <span class="badge"><span class="dot"></span> Panel · 2026</span>
+          <span>Principal XD · Agentic workflows</span>
+        </div>
+        <div>
+          <h1 class="s1-title">Intake <em>Agent</em></h1>
+          <p class="s1-sub">Three mini case studies: employee UI, admin, prompts &amp; in-thread design.</p>
+        </div>
+        <div class="s1-foot">
+          <div>
+            <div class="name">Eric Huang · Lead UX, Workday</div>
+            <div class="meta"><span>Web</span><span>2024–2026</span></div>
+          </div>
+          <div class="s1-tags">
+            <span class="s1-tag is-accent">Case study</span>
+            <span class="s1-tag">Agentic</span>
+            <span class="s1-tag">Enterprise</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 2 — THREE THREADS ====== -->
+      <section class="slide slide--who" data-slide="2" aria-label="Three parallel case threads">
+        <div class="s-eyebrow">How I’ll use our time</div>
+        <h2 class="s2-headline">Three <em>parallel</em> threads · one product contract.</h2>
+        <div class="s-overview">
+          <div class="s-overview-card">
+            <div class="star">1 · Employee UI</div>
+            <h3>Situation → Task → Action → Result</h3>
+            <p>Fragmented guidance → bar for the page → hybrid IA + side assistant → Phase 1 ship.</p>
+          </div>
+          <div class="s-overview-card">
+            <div class="star">2 · Admin</div>
+            <h3>Situation → Task → Action → Result</h3>
+            <p>LLM can be wrong → no “knowledge” setup pattern yet → wizard + playground → shipped with v1.</p>
+          </div>
+          <div class="s-overview-card">
+            <div class="star">3 · Prompts / LLM</div>
+            <h3>Situation → Task → Action → Result</h3>
+            <p>Q&amp;A wasn’t the whole job → same “show work + one step” habit → catalog / forms / pricing in-thread → Phase 2 + reuse.</p>
+          </div>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Map</div>
+          <div class="right">02 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 3 — EU SITUATION ====== -->
+      <section class="slide slide--problem" data-slide="3" aria-label="End user situation">
+        <div class="s-head">
+          <div class="s-eyebrow">End user UI · Situation</div>
+        </div>
+        <h2 class="s-headline">No <em>closed loop</em> for buying truth.</h2>
+        <div class="s3-grid">
+          <div class="s3-left">
+            <div class="label">Reality</div>
+            <p>Wikis, Slack, PDFs, wrong path on forms. <strong>Compliance + money</strong> on the line.</p>
+            <p>Bad answers did not route back into <strong>rule change</strong> fast enough.</p>
+          </div>
+          <table class="s3-table">
+            <thead><tr><th>Signal</th><th>So we…</th></tr></thead>
+            <tbody>
+              <tr><td>Repeat “how do I?” tickets</td><td>Scale in product, not headcount</td></tr>
+              <tr><td>Docs go stale</td><td>Admin-owned source of truth</td></tr>
+              <tr><td>Trust in guidance</td><td>Cite sources; user can verify</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="s3-insight">
+          <div class="label">Pivot</div>
+          <div class="quote">Workflow first. Q&amp;A second.</div>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Employee · Situation</div>
+          <div class="right">03 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 4 — EU TASK ====== -->
+      <section class="slide slide--who slide--task" data-slide="4" aria-label="End user task">
+        <div class="s-eyebrow">End user UI · Task</div>
+        <h2 class="s2-headline">What the page had to <em>prove.</em></h2>
+        <div class="s2-body s2-body--task">
+          <p><strong>Workflow first</strong> · Routing + audit, not a chat demo.</p>
+          <p><strong>Bar</strong> · Grounded answers, citations, <strong>one</strong> governed next step per turn.</p>
+          <p><strong>IA</strong> · Same policy context for Quick Links, open ask, assistant — no full-page dump.</p>
+          <p><strong>Out</strong> · Category gate before “allowed?” · full-page chat (weak handoff, trust risk).</p>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Employee · Task</div>
+          <div class="right">04 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 5 — EU ACTION ====== -->
+      <section class="slide slide--rejected" data-slide="5" aria-label="End user action">
+        <div class="s-head">
+          <div class="s-eyebrow">End user UI · Action</div>
+        </div>
+        <h2 class="s-headline">Hybrid IA + <em>side assistant</em> + sequence.</h2>
+        <div class="eu-action-stack">
+          <div class="s4-options">
+            <div class="s4-card">
+              <span class="tag">Out</span>
+              <h3>Form-first</h3>
+              <ul>
+                <li>Category before “is this allowed?”</li>
+              </ul>
+            </div>
+            <div class="s4-card">
+              <span class="tag">Out</span>
+              <h3>Full-page chat</h3>
+              <ul>
+                <li>Weak routing; wrong-but-confident</li>
+              </ul>
+            </div>
+          </div>
+          <div class="s4-tradeoff">
+            <span class="label">Pick</span>
+            <span class="body">Outcome over “AI-native” optics.</span>
+          </div>
+          <div class="s4-shipped">
+            <p><strong>Hybrid</strong>Quick Links + open ask + side slot. Invariant: answer · source · one handoff.</p>
+            <div class="deck-shot"><img src="images/intake-agent/01-landing-quick-links.png" alt="Hybrid landing" loading="lazy" /></div>
+          </div>
+          <div class="s6-flow">
+            <div class="s6-frame">
+              <div class="s6-shot"><img src="images/intake-agent/02-search-po-query.png" alt="Question" loading="lazy" /></div>
+              <div class="s6-cap"><span class="step">01</span><span class="label">Ask.</span></div>
+            </div>
+            <div class="s6-frame">
+              <div class="s6-shot"><img src="images/intake-agent/03-agent-thinking.png" alt="Loading" loading="lazy" /></div>
+              <div class="s6-cap"><span class="step">02</span><span class="label">Panel; page stays put.</span></div>
+            </div>
+            <div class="s6-frame">
+              <div class="s6-shot"><img src="images/intake-agent/04-agent-po-answer.png" alt="Answer" loading="lazy" /></div>
+              <div class="s6-cap"><span class="step">03</span><span class="label">Answer + source + next step.</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Employee · Action</div>
+          <div class="right">05 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 6 — EU RESULT ====== -->
+      <section class="slide slide--phase1" data-slide="6" aria-label="End user result">
+        <div class="s-head">
+          <div class="s-eyebrow">End user UI · Result</div>
+        </div>
+        <h2 class="s-headline">Phase 1 <em>on the page.</em></h2>
+        <div class="s2-body s2-body--task" style="margin-top: 0.6cqi; flex: 1;">
+          <p><strong>Shipped</strong> · Hybrid front door + assistant PMs could demo without apologizing for handoff.</p>
+          <p><strong>Signal</strong> · One door for “how do I buy X?” — fewer scatter-channel loops (metric if shareable).</p>
+          <p><strong>Primitive</strong> · Answer + source + one action — reused on other surfaces later.</p>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Employee · Result</div>
+          <div class="right">06 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 7 — ADMIN SITUATION ====== -->
+      <section class="slide slide--system" data-slide="7" aria-label="Admin situation">
+        <div class="s-head">
+          <div class="s-eyebrow">Admin · Situation</div>
+        </div>
+        <h2 class="s-headline">The LLM could answer — <em>we needed a clear way to control it.</em></h2>
+        <div class="s5-loop">
+          <div class="s5-node s5-node--admin">
+            <span class="who">What we had</span>
+            <span class="what">An LLM helping employees · can be wrong or off-script</span>
+          </div>
+          <span class="s5-arrow">→</span>
+          <div class="s5-node s5-node--user">
+            <span class="who">What was missing</span>
+            <span class="what">No simple “add knowledge + safe setup” story for admins yet</span>
+          </div>
+          <span class="s5-arrow">→</span>
+          <div class="s5-node">
+            <span class="who">What we needed</span>
+            <span class="what">Step-by-step setup + test before launch</span>
+          </div>
+        </div>
+        <div class="s5-grid">
+          <div class="s5-quote">
+            <div class="label">Plain story</div>
+            <div class="text">Linear wizard: load data → define what comes out → set up what employees see → try it in a playground → then go live.</div>
+            <div class="attrib">Same idea as “knowledge” in assistants today — we had to design the path early.</div>
+          </div>
+          <table class="s5-table">
+            <thead><tr><th>The problem</th><th>So we…</th></tr></thead>
+            <tbody>
+              <tr><td>Model can hallucinate</td><td>Control what it’s allowed to use</td></tr>
+              <tr><td>Admins weren’t sure how to start</td><td>One ordered path, not 50 settings at once</td></tr>
+              <tr><td>Launch felt risky</td><td>Playground to verify before employees use it</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Admin · Situation</div>
+          <div class="right">07 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 8 — ADMIN TASK ====== -->
+      <section class="slide slide--who slide--task" data-slide="8" aria-label="Admin task">
+        <div class="s-eyebrow">Admin · Task</div>
+        <h2 class="s2-headline">Give admins a path they can <em>trust.</em></h2>
+        <div class="s2-body s2-body--task">
+          <p><strong>Order of operations</strong> · Data in → answers &amp; routing → employee-facing experience → <strong>testing playground</strong> → go live.</p>
+          <p><strong>Control</strong> · Make allowed sources and allowed “next steps” <strong>explicit</strong> — not something the model guesses in the moment.</p>
+          <p><strong>After launch</strong> · Let admins see what happened and adjust in a maintainable way.</p>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Admin · Task</div>
+          <div class="right">08 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 9 — ADMIN ACTION ====== -->
+      <section class="slide slide--system" data-slide="9" aria-label="Admin action">
+        <div class="s-head">
+          <div class="s-eyebrow">Admin · Action</div>
+        </div>
+        <h2 class="s-headline">We built the <em>wizard</em> and the screens behind it.</h2>
+        <div class="s5-grid" style="flex: 0 0 auto;">
+          <div class="s5-quote" style="padding-top: 0;">
+            <div class="label">Flow</div>
+            <div class="text" style="font-size: 1.35cqi;">Add data → define answers &amp; routing → configure employee UI → playground → go live → refine from usage.</div>
+          </div>
+          <table class="s5-table">
+            <thead><tr><th>Step</th><th>In plain terms</th></tr></thead>
+            <tbody>
+              <tr><td>Add your data</td><td>What the assistant is allowed to learn from</td></tr>
+              <tr><td>Routing &amp; outputs</td><td>What people hear and where “next” goes</td></tr>
+              <tr><td>Playground</td><td>Run real questions before employees do</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="admin-shots">
+          <div class="deck-shot"><img src="images/intake-agent/09-admin-routing-table.png" alt="Routing table" loading="lazy" /></div>
+          <div class="deck-shot"><img src="images/intake-agent/11-admin-testing-playground.png" alt="Testing playground" loading="lazy" /></div>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Admin · Action</div>
+          <div class="right">09 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 10 — ADMIN RESULT ====== -->
+      <section class="slide slide--who slide--task" data-slide="10" aria-label="Admin result">
+        <div class="s-eyebrow">Admin · Result</div>
+        <h2 class="s2-headline">Admins could set up and <em>ship without guesswork.</em></h2>
+        <div class="s2-body s2-body--task">
+          <p><strong>Shipped together</strong> · Admin setup went out in the <strong>same release</strong> as the employee assistant — not “later.”</p>
+          <p><strong>Trust moment</strong> · Playground meant they could <strong>see</strong> answers before anyone relied on them in production.</p>
+          <p><strong>Next time</strong> · Stronger <strong>preview</strong> of the employee view while configuring, and easier <strong>rollback</strong> when rules change.</p>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Admin · Result</div>
+          <div class="right">10 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 11 — PROMPTS SITUATION ====== -->
+      <section class="slide slide--problem" data-slide="11" aria-label="Prompts situation">
+        <div class="s-head">
+          <div class="s-eyebrow">Prompts &amp; LLM · Situation</div>
+        </div>
+        <h2 class="s-headline">Q&amp;A worked — <em>buying didn’t stop there.</em></h2>
+        <div class="s3-grid">
+          <div class="s3-left">
+            <div class="label">What was still missing</div>
+            <p>People still needed <strong>catalog lines, quantities, real fields, pricing</strong> — not only policy answers and a link away.</p>
+            <p>If we “fixed” that with <strong>more free-form model text</strong>, we’d get confident answers that <strong>don’t match</strong> what’s on screen. The <strong>UI and the prompts</strong> have to stay in lockstep.</p>
+          </div>
+          <table class="s3-table">
+            <thead><tr><th>Employee need</th><th>So we had to…</th></tr></thead>
+            <tbody>
+              <tr><td>Pick &amp; submit catalog items</td><td>Keep it in the same thread, step by step</td></tr>
+              <tr><td>Off-catalog requests</td><td>Real fields inline — no surprise jump-out</td></tr>
+              <tr><td>Pricing</td><td>Same conversation, same policy story</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="s3-insight">
+          <div class="label">Plain story</div>
+          <div class="quote">Longer flows are still the same assistant — not a pile of new tricks.</div>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Prompts · Situation</div>
+          <div class="right">11 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 12 — PROMPTS TASK ====== -->
+      <section class="slide slide--who slide--task" data-slide="12" aria-label="Prompts task">
+        <div class="s-eyebrow">Prompts &amp; LLM · Task</div>
+        <h2 class="s2-headline">Finish the purchase <em>without breaking the habit.</em></h2>
+        <div class="s2-body s2-body--task">
+          <p><strong>Same column</strong> · Catalog, off-catalog, and pricing all happen where people <strong>already trust</strong> the assistant from Phase 1.</p>
+          <p><strong>Same beat</strong> · Each step stays <strong>answer → where it came from → one clear next thing</strong> — not five competing buttons from the model.</p>
+          <p><strong>Same admin rules</strong> · What admins loaded and routed still <strong>feeds</strong> what the model can do in these longer flows.</p>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Prompts · Task</div>
+          <div class="right">12 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 13 — PROMPTS ACTION ====== -->
+      <section class="slide slide--craft" data-slide="13" aria-label="Prompts action">
+        <div class="s-head">
+          <div class="s-eyebrow">Prompts &amp; LLM · Action</div>
+        </div>
+        <h2 class="s-headline">Same <em>recipe</em> for catalog, forms, and pricing.</h2>
+        <div class="s7-grid">
+          <div>
+            <div class="s7-pattern">
+              <div class="label">Every heavy step still has</div>
+              <div class="s7-row">Answer</div>
+              <div class="s7-row">Where we got it</div>
+              <span class="s7-action">One main next step →</span>
+            </div>
+            <p class="s7-source"><strong>What we built:</strong> clear cards for catalog, inline fields for off-catalog, pricing in-thread — each with a <strong>bounded job</strong> for the model, not open-ended prose.</p>
+          </div>
+          <div class="s7-phase2">
+            <h4>Phase 2 <em>in the product</em></h4>
+            <ul>
+              <li><strong>Catalog</strong> · pick lines + qty, submit in the same column</li>
+              <li><strong>Off-catalog</strong> · structured fields where the chat already lives</li>
+              <li><strong>Pricing</strong> · same side-panel rhythm as Phase 1</li>
+            </ul>
+            <div class="s7-shots" style="grid-template-columns: 1fr 1fr 1fr; max-height: 30cqi;">
+              <div class="s6-shot"><img src="images/intake-agent/13-phase2-catalog-requisition.png" alt="Catalog" loading="lazy" /></div>
+              <div class="s6-shot"><img src="images/intake-agent/14-phase2-noncatalog-request-form.png" alt="Form" loading="lazy" /></div>
+              <div class="s6-shot"><img src="images/intake-agent/15-phase2-noncatalog-pricing.png" alt="Pricing" loading="lazy" /></div>
+            </div>
+          </div>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Prompts · Action</div>
+          <div class="right">13 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 14 — PROMPTS RESULT ====== -->
+      <section class="slide slide--who slide--task" data-slide="14" aria-label="Prompts result">
+        <div class="s-eyebrow">Prompts &amp; LLM · Result</div>
+        <h2 class="s2-headline">Phase 2 shipped — <em>one habit, more flows.</em></h2>
+        <div class="s2-body s2-body--task">
+          <p><strong>2026</strong> · Catalog, forms, and pricing ran <strong>end-to-end in the same trace</strong> as the original Q&amp;A experience.</p>
+          <p><strong>Reuse</strong> · The same <strong>answer / source / one next step</strong> pattern showed up on <strong>other</strong> assistant surfaces — build once, use again.</p>
+          <p><strong>Next time</strong> · Test prompts against <strong>real traffic</strong> earlier, and tighten <strong>admin preview</strong> so the employee view never drifts from what we think we shipped.</p>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Prompts · Result</div>
+          <div class="right">14 / 15</div>
+        </div>
+      </section>
+
+      <!-- ====== SLIDE 15 — SYNTHESIS ====== -->
+      <section class="slide slide--outcomes slide--result" data-slide="15" aria-label="Synthesis and outcomes">
+        <div class="s-head">
+          <div class="s-eyebrow">Across all three</div>
+        </div>
+        <h2 class="s-headline">Two waves. <em>One system.</em></h2>
+        <div class="s9-grid">
+          <div class="s9-col">
+            <h4>Proof</h4>
+            <ul class="s9-list">
+              <li>2024 · Employee UI + assistant + <strong>admin v1</strong></li>
+              <li>2026 · Catalog, forms, pricing <strong>in the same assistant flow</strong> — prompts matched to UI</li>
+              <li>One story: employee UI · admin setup · <strong>what we ask the model to do</strong></li>
+            </ul>
+          </div>
+          <div class="s9-col" style="display: flex; flex-direction: column; gap: 0; height: 100%; min-height: 0;">
+            <h4>Decisions (summary)</h4>
+            <table class="s8-table" style="font-size: 1.05cqi; margin-top: 0.4cqi;">
+              <tbody>
+                <tr><td>Hybrid vs chat-only</td><td class="result">Hybrid</td></tr>
+                <tr><td>Routing</td><td class="result">Deterministic table</td></tr>
+                <tr><td>Admin timing</td><td class="result">Shipped v1</td></tr>
+              </tbody>
+            </table>
+            <div class="s9-callout" style="margin-top: 0.6cqi;">
+              <strong>Learning</strong>
+              Preview · eval · versioned rollback — earlier.
+            </div>
+          </div>
+        </div>
+        <div class="s10-close s10-close--result">
+          <div class="sig sig--block">
+            <strong>Eric Huang</strong>
+            eric.chakho.wong@gmail.com · linkedin.com/in/zehao-eric-huang
+          </div>
+        </div>
+        <div class="s-footer">
+          <div class="left"><strong>Intake Agent</strong> · Synthesis</div>
+          <div class="right">15 / 15</div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="deck-chrome">
+    <div class="grp">
+      <button class="deck-btn" id="prevBtn" title="Previous slide (←)" aria-label="Previous slide">←</button>
+      <button class="deck-btn" id="nextBtn" title="Next slide (→)" aria-label="Next slide">→</button>
+      <span class="deck-counter" id="counter">01 / 15</span>
+    </div>
+    <div class="grp">
+      <button class="deck-btn is-icon" id="notesBtn" title="Toggle speaker notes (N)">Notes</button>
+      <a class="deck-btn is-icon" href="intake-agent.html" title="Back to case study">Case study →</a>
+    </div>
+  </div>
+
+  <div class="notes-overlay" id="notesOverlay" role="dialog" aria-modal="true" aria-label="Speaker notes" hidden>
+    <div class="notes-card" id="notesCard"></div>
+    <div class="notes-hint">Press <kbd>N</kbd> or <kbd>Esc</kbd> to close</div>
+  </div>
+
+  <div class="deck-hint" id="deckHint">
+    Press <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to navigate &middot; <kbd>N</kbd> for notes &middot; <kbd>F</kbd> for fullscreen
+  </div>
+
+  <script id="deck-data" type="application/json">
+[
+  { "title": "Title", "notes": "<p>One line: fragmented buying truth + risk. Three threads (employee, admin, prompts) — not a STAR lecture.</p>" },
+  { "title": "Map", "notes": "<p>~45s. Same product contract; each thread is Situation→Task→Action→Result for you, not for the audience as vocabulary.</p>" },
+  { "title": "Employee · Situation", "notes": "<p>Tickets, stale docs, compliance angle. Pivot: workflow first.</p>" },
+  { "title": "Employee · Task", "notes": "<p>Bar before pixels: one next step, citations, same policy context everywhere.</p>" },
+  { "title": "Employee · Action", "notes": "<p>Rejected options, hybrid shipped, walk 01→02→03 as sequence.</p>" },
+  { "title": "Employee · Result", "notes": "<p>Phase 1 proof, primitive locked, metric if shareable.</p>" },
+  { "title": "Admin · Situation", "notes": "<p>Simple arc: LLM helps employees but can be wrong. We didn’t yet have an obvious “knowledge + setup” pattern like many products do now. Admins needed a straight line: data → outputs → employee UI → test → launch.</p>" },
+  { "title": "Admin · Task", "notes": "<p>Goal: ordered setup + explicit control of sources and next steps + test before live. Avoid model-improvised routing.</p>" },
+  { "title": "Admin · Action", "notes": "<p>Wizard + real screens. Call out playground as the “I believe this” moment. Routing table + testing screenshots.</p>" },
+  { "title": "Admin · Result", "notes": "<p>Shipped with employee app same wave. Admins weren’t blind at launch. Preview + rollback for next iteration.</p>" },
+  { "title": "Prompts · Situation", "notes": "<p>Phase 1 Q&amp;A wasn’t the whole job — people still had catalog, fields, pricing. Risk: more model text without matching UI. Same trust habit: show sources, one next step, same thread.</p>" },
+  { "title": "Prompts · Task", "notes": "<p>Goal: finish buying in the same column. Same three-part rhythm. Admin rules still apply in longer flows.</p>" },
+  { "title": "Prompts · Action", "notes": "<p>Recipe + three screenshots. Each flow = bounded job for model + clear UI card. Pick one deep example if they probe.</p>" },
+  { "title": "Prompts · Result", "notes": "<p>2026 in-thread ship; pattern reused elsewhere. Next: real-traffic prompt tests + tighter admin/employee preview.</p>" },
+  { "title": "Synthesis", "notes": "<p>Two waves, one system. Decisions table + learning. Calm close.</p>" }
+]
+  </script>
+  <script id="deck-script">
+    (function () {
+      const deck = document.getElementById('deck');
+      const slides = Array.from(deck.querySelectorAll('.slide'));
+      const total = slides.length;
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const counter = document.getElementById('counter');
+      const progress = document.getElementById('progressBar');
+      const notesBtn = document.getElementById('notesBtn');
+      const notesOverlay = document.getElementById('notesOverlay');
+      const notesCard = document.getElementById('notesCard');
+      const hint = document.getElementById('deckHint');
+      const notesData = JSON.parse(document.getElementById('deck-data').textContent);
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      function indexFromHash() {
+        const m = (location.hash || '').match(/#?(\d+)/);
+        if (!m) return 0;
+        const i = parseInt(m[1], 10) - 1;
+        return Math.min(Math.max(i, 0), total - 1);
+      }
+
+      let current = indexFromHash();
+
+      function render() {
+        slides.forEach((s, i) => s.classList.toggle('is-active', i === current));
+        counter.textContent = pad(current + 1) + ' / ' + pad(total);
+        progress.style.width = ((current + 1) / total * 100) + '%';
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === total - 1;
+        if ((location.hash || '').replace('#','') !== String(current + 1)) {
+          history.replaceState(null, '', '#' + (current + 1));
+        }
+        if (notesOverlay.classList.contains('is-open')) renderNotes();
+      }
+
+      function go(i) {
+        const next = Math.min(Math.max(i, 0), total - 1);
+        if (next === current) return;
+        current = next;
+        render();
+      }
+
+      function renderNotes() {
+        const data = notesData[current] || { title: '', notes: '' };
+        notesCard.innerHTML =
+          '<div class="label"><span>Speaker notes &middot; ' + data.title + '</span><span class="num">' + pad(current + 1) + ' / ' + pad(total) + '</span></div>' +
+          '<h4>' + (slides[current].querySelector('.s-headline, .s2-headline, .s1-title, .s10-quote')?.textContent.trim() || data.title) + '</h4>' +
+          data.notes;
+      }
+
+      function toggleNotes(force) {
+        const willOpen = typeof force === 'boolean' ? force : !notesOverlay.classList.contains('is-open');
+        if (willOpen) {
+          notesOverlay.removeAttribute('hidden');
+          renderNotes();
+          requestAnimationFrame(() => notesOverlay.classList.add('is-open'));
+        } else {
+          notesOverlay.classList.remove('is-open');
+          setTimeout(() => notesOverlay.setAttribute('hidden', ''), 240);
+        }
+      }
+
+      prevBtn.addEventListener('click', () => go(current - 1));
+      nextBtn.addEventListener('click', () => go(current + 1));
+      notesBtn.addEventListener('click', () => toggleNotes());
+      notesOverlay.addEventListener('click', (e) => { if (e.target === notesOverlay) toggleNotes(false); });
+
+      window.addEventListener('hashchange', () => { current = indexFromHash(); render(); });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.target.matches('input, textarea, select')) return;
+        const k = e.key;
+        if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Spacebar') { e.preventDefault(); go(current + 1); }
+        else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); go(current - 1); }
+        else if (k === 'Home') { e.preventDefault(); go(0); }
+        else if (k === 'End') { e.preventDefault(); go(total - 1); }
+        else if (k === 'n' || k === 'N') { e.preventDefault(); toggleNotes(); }
+        else if (k === 'Escape') { if (notesOverlay.classList.contains('is-open')) toggleNotes(false); }
+        else if (k === 'f' || k === 'F') {
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+          else document.exitFullscreen?.();
+        }
+        else if (/^[0-9]$/.test(k)) {
+          const n = parseInt(k, 10);
+          if (n === 0) go(total - 1);
+          else if (n >= 1 && n <= total) go(n - 1);
+        }
+      });
+
+      let touchStartX = null;
+      window.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      window.addEventListener('touchend', (e) => {
+        if (touchStartX === null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 60) go(current + (dx < 0 ? 1 : -1));
+        touchStartX = null;
+      }, { passive: true });
+
+      hint.classList.add('is-visible');
+      setTimeout(() => hint.classList.remove('is-visible'), 4000);
+
+      render();
+    })();
+  </script>
+  <script>
+    (function () {
+      var KEY = 'intake_agent_presentation';
+      var PASS = 'go';
+      if (document.documentElement.classList.contains('deck-authed')) return;
+      var gate = document.getElementById('deckGate');
+      var form = document.getElementById('deckGateForm');
+      var input = document.getElementById('deckGateInput');
+      var err = document.getElementById('deckGateErr');
+      if (!gate || !form || !input || !err) return;
+      input.focus();
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (input.value.trim().toLowerCase() === PASS) {
+          try { localStorage.setItem(KEY, '1'); } catch (e) {}
+          try { sessionStorage.setItem(KEY, '1'); } catch (e2) {}
+          document.documentElement.classList.add('deck-authed');
+          gate.remove();
+          input.blur();
+          return;
+        }
+        err.hidden = false;
+        input.value = '';
+        input.focus();
+      });
+    })();
+  </script>
+</body>
+</html>

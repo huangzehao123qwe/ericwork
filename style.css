@@ -1775,6 +1775,13 @@ nav.nav--past-header .nav-back {
 .more-story-text strong,
 .more-story-text .more-story-lead { font-size: 15px; font-weight: 700; color: #fff; }
 .more-story-text span { font-size: 13px; line-height: 1.55; max-width: 520px; }
+.more-story-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
 .more-story-badge {
   display: inline-flex;
   align-items: center;
@@ -1788,8 +1795,108 @@ nav.nav--past-header .nav-back {
   border-radius: 100px;
   white-space: nowrap;
   transition: background var(--transition);
+  text-decoration: none;
+  font-family: inherit;
+  cursor: pointer;
 }
 .more-story-badge:hover { background: rgba(255,255,255,.18); }
+.more-story-badge--ghost {
+  background: transparent;
+  color: rgba(255,255,255,.85);
+}
+.more-story-badge--ghost:hover {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+}
+
+/* Presentation mode password dialog (Intake Agent) */
+.presentation-auth-dialog {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px 20px;
+  max-width: 380px;
+  width: calc(100vw - 32px);
+  box-shadow: var(--shadow-lg);
+}
+.presentation-auth-dialog::backdrop {
+  background: rgba(15, 15, 20, 0.45);
+  backdrop-filter: blur(4px);
+}
+.presentation-auth-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+.presentation-auth-desc {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+  margin: 0 0 18px;
+}
+.presentation-auth-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 8px;
+}
+.presentation-auth-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.presentation-auth-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+}
+.presentation-auth-err {
+  font-size: 13px;
+  color: #B91C1C;
+  margin: 10px 0 0;
+}
+.presentation-auth-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.presentation-auth-cancel {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink-secondary);
+  cursor: pointer;
+}
+.presentation-auth-cancel:hover {
+  background: var(--bg-subtle, #F4F4F5);
+}
+.presentation-auth-submit {
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+.presentation-auth-submit:hover {
+  opacity: 0.92;
+}
 
 /* ─── CHECKLIST ─── */
 .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; }
@@ -3106,7 +3213,8 @@ footer a.footer-cta--secondary:hover img { opacity: 1; }
   .cs-meta-item { border-right: none; border-bottom: 1px solid var(--border); }
   .cs-meta-item:last-child { border-bottom: none; }
   .my-role-block { flex-direction: column; }
-  .more-story { flex-direction: column; }
+  .more-story { flex-direction: column; align-items: stretch; }
+  .more-story-actions { justify-content: flex-start; width: 100%; }
   .case-study.standalone { padding-top: 36px; }
   .quote-mark { font-size: clamp(48px, 14vw, 72px); left: clamp(20px, 4vw, 36px); }
 }
